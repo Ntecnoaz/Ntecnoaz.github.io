@@ -1,1 +1,144 @@
 
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ntecno Clicker - Mini Oyun</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            color: #38bdf8;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        #score {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #facc15;
+            margin: 20px 0;
+        }
+        #clickBtn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border: none;
+            border-style: none;
+            color: white;
+            font-size: 2rem;
+            padding: 30px 60px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+            transition: transform 0.1s ease, background 0.2s;
+            outline: none;
+            user-select: none;
+        }
+        #clickBtn:active {
+            transform: scale(0.92);
+        }
+        .upgrade-box {
+            margin-top: 30px;
+            background: #1e293b;
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+        #upgradeBtn {
+            background-color: #22c55e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        #upgradeBtn:hover {
+            background-color: #16a34a;
+        }
+        #upgradeBtn:disabled {
+            background-color: #475569;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ntecno Clicker</h1>
+    <p>Nə qədər çox tıklaya bilərsən? Dostuna meydan oxu!</p>
+    
+    <div id="score">0</div>
+    
+    <button id="clickBtn" onclick="clickScore()">🎯 TIKLA!</button>
+
+    <div class="upgrade-box">
+        <div>Avtomatik Tıklayıcı: <span id="autoCount">0</span></div>
+        <button id="upgradeBtn" onclick="buyAutoClicker()">Avto-Bot Al (Qiymət: <span id="upgradeCost">50</span> xal)</button>
+    </div>
+
+    <script>
+        let score = 0;
+        let clickPower = 1;
+        let autoClickers = 0;
+        let upgradeCost = 50;
+
+        const scoreDisplay = document.getElementById("score");
+        const autoCountDisplay = document.getElementById("autoCount");
+        const upgradeCostDisplay = document.getElementById("upgradeCost");
+        const upgradeBtn = document.getElementById("upgradeBtn");
+
+        function clickScore() {
+            score += clickPower;
+            updateDisplay();
+        }
+
+        function buyAutoClicker() {
+            if (score >= upgradeCost) {
+                score -= upgradeCost;
+                autoClickers++;
+                upgradeCost = Math.floor(upgradeCost * 1.5);
+                updateDisplay();
+            }
+        }
+
+        // Hər 1 saniyədə avtomatik xal artımı
+        setInterval(function() {
+            if (autoClickers > 0) {
+                score += autoClickers;
+                updateDisplay();
+            }
+        }, 1000);
+
+        function updateDisplay() {
+            scoreDisplay.innerText = score;
+            autoCountDisplay.innerText = autoClickers;
+            upgradeCostDisplay.innerText = upgradeCost;
+
+            if (score >= upgradeCost) {
+                upgradeBtn.removeAttribute("disabled");
+            } else {
+                upgradeBtn.setAttribute("disabled", "true");
+            }
+        }
+    </script>
+
+</body>
+</html>
