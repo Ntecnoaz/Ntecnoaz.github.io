@@ -1,144 +1,105 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ntecno Clicker - Mini Oyun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ntecno Game</title>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background: #111;
+            color: #fff;
             overflow: hidden;
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            color: #38bdf8;
-        }
-        p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-        }
-        #score {
-            font-size: 4rem;
+        #header {
+            padding: 10px;
+            background: #222;
+            font-size: 20px;
             font-weight: bold;
-            color: #facc15;
-            margin: 20px 0;
+            color: #00e676;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 400px;
+            margin: 0 auto;
         }
-        #clickBtn {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        #game-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            margin: 0 auto;
+            border: 2px solid #00e676;
+            overflow: hidden;
+        }
+        canvas { display: block; width: 100%; height: 100%; }
+        .mode-btn {
+            padding: 5px 10px;
+            font-size: 12px;
+            background: #00e676;
             border: none;
-            border-style: none;
-            color: white;
-            font-size: 2rem;
-            padding: 30px 60px;
-            border-radius: 50px;
+            border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
-            transition: transform 0.1s ease, background 0.2s;
-            outline: none;
-            user-select: none;
+            font-weight: bold;
         }
-        #clickBtn:active {
-            transform: scale(0.92);
-        }
-        .upgrade-box {
-            margin-top: 30px;
-            background: #1e293b;
-            padding: 15px 25px;
-            border-radius: 12px;
-            border: 1px solid #334155;
-        }
-        #upgradeBtn {
-            background-color: #22c55e;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
+        #shop {
+            max-width: 400px;
+            margin: 10px auto;
+            background: #222;
+            padding: 10px;
             border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .skin-btn {
+            padding: 8px 12px;
+            font-size: 12px;
+            border: 1px solid #00e676;
+            background: #333;
+            color: #fff;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: background 0.2s;
         }
-        #upgradeBtn:hover {
-            background-color: #16a34a;
-        }
-        #upgradeBtn:disabled {
-            background-color: #475569;
-            cursor: not-allowed;
-        }
+        .skin-btn:disabled { border-color: #555; color: #777; cursor: not-allowed; }
     </style>
 </head>
 <body>
 
-    <h1>Ntecno Clicker</h1>
-    <p>Nə qədər çox tıklaya bilərsən? Dostuna meydan oxu!</p>
-    
-    <div id="score">0</div>
-    
-    <button id="clickBtn" onclick="clickScore()">🎯 TIKLA!</button>
+    <div id="header">
+        <span>Ntecno Game 🐸</span>
+        <button class="mode-btn" id="modeBtn" onclick="toggleMode()">🌙 Gecə</button>
+    </div>
 
-    <div class="upgrade-box">
-        <div>Avtomatik Tıklayıcı: <span id="autoCount">0</span></div>
-        <button id="upgradeBtn" onclick="buyAutoClicker()">Avto-Bot Al (Qiymət: <span id="upgradeCost">50</span> xal)</button>
+    <div id="game-container">
+        <canvas id="gameCanvas" width="400" height="500"></canvas>
+    </div>
+
+    <div id="shop">
+        <button class="skin-btn" onclick="buySkin('green', 0)">🟢 Yaşıl (0)</button>
+        <button class="skin-btn" id="skin-silver" onclick="buySkin('silver', 15)">🥈 Gümüş (15)</button>
+        <button class="skin-btn" id="skin-gold" onclick="buySkin('gold', 40)">🥇 Gold (40)</button>
+        <button class="skin-btn" id="skin-rainbow" onclick="buySkin('rainbow', 100)">🌈 Göyqurşağı (100)</button>
+        <button class="skin-btn" id="skin-lava" onclick="buySkin('lava', 1000)">🌋 Lava (1000)</button>
     </div>
 
     <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
         let score = 0;
-        let clickPower = 1;
-        let autoClickers = 0;
-        let upgradeCost = 50;
+        let coins = 0;
+        let isNight = false;
+        let gameOver = false;
+        let gameStarted = false;
 
-        const scoreDisplay = document.getElementById("score");
-        const autoCountDisplay = document.getElementById("autoCount");
-        const upgradeCostDisplay = document.getElementById("upgradeCost");
-        const upgradeBtn = document.getElementById("upgradeBtn");
+        // Frog Properties
+        let frog = { x: 50, y: 200, size: 24, gravity: 0.35, jump: -6.5, velocity: 0, color: 'green' };
+        let pipes = [];
+        let pipeWidth = 55;
+        let pipeGap = 130;
+        let frame
 
-        function clickScore() {
-            score += clickPower;
-            updateDisplay();
-        }
-
-        function buyAutoClicker() {
-            if (score >= upgradeCost) {
-                score -= upgradeCost;
-                autoClickers++;
-                upgradeCost = Math.floor(upgradeCost * 1.5);
-                updateDisplay();
-            }
-        }
-
-        // Hər 1 saniyədə avtomatik xal artımı
-        setInterval(function() {
-            if (autoClickers > 0) {
-                score += autoClickers;
-                updateDisplay();
-            }
-        }, 1000);
-
-        function updateDisplay() {
-            scoreDisplay.innerText = score;
-            autoCountDisplay.innerText = autoClickers;
-            upgradeCostDisplay.innerText = upgradeCost;
-
-            if (score >= upgradeCost) {
-                upgradeBtn.removeAttribute("disabled");
-            } else {
-                upgradeBtn.setAttribute("disabled", "true");
-            }
-        }
-    </script>
-
-</body>
-</html>
