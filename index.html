@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nTecnoAz — TecnoGPT Yapay Zeka Portal</title>
+    <title>nTecnoAz — TecnoGPT Real AI Portal</title>
     
     <!-- Google Fonts & FontAwesome İkonları -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -293,7 +293,7 @@
     </div>
 
     <script>
-        // 🔑 SƏNİN DÜZGÜN FORMATDA CİLALANMIŞ GROQ API KEY-İN:
+        // 🔑 DÜZƏLDİLMİŞ VƏ KİÇİK gsk_ İLƏ BAŞLAYAN AKTİV API KEY:
         const GROQ_API_KEY = "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";
 
         let currentAvatar = '🐼';
@@ -321,7 +321,7 @@
             const loadingId = addMessage("Fikirləşirəm...", 'bot', currentAvatar);
             const q = text.toLowerCase().trim();
 
-            // 1. Xüsusi Şəxsiyyət Qaydaları
+            // 1. Məcburi Xüsusi Şəxsiyyət Qaydaları
             if (q.includes("seni kim") || q.includes("səni kim") || q.includes("qurub") || q.includes("yaradib") || q.includes("yaradıb") || q.includes("sahibin")) {
                 setTimeout(() => updateMessage(loadingId, "Məni <b>Nicat Rəhimli</b> yaradıb."), 300);
                 return;
@@ -332,7 +332,7 @@
                 return;
             }
 
-            // 2. Canlı Groq API (Sürətli Llama 3.3 70B AI)
+            // 2. Canlı Groq API Sorğusu (Llama 3.3 70B AI)
             try {
                 const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                     method: "POST",
@@ -345,7 +345,7 @@
                         messages: [
                             { 
                                 role: "system", 
-                                content: "Sən nTecnoAz brendi üçün TecnoGPT adında ağıllı süni intellekt köməkçisisən. Nicat Rəhimli tərəfindən yaradılmısan və Azərbaycandansan. HAMİSINI ANCAQ VƏ ANCAQ AZƏRBAYCAN DİLİNDƏ CAVABLANDIR." 
+                                content: "Sən nTecnoAz brendi üçün TecnoGPT adında ağıllı süni intellekt köməkçisisən. Nicat Rəhimli tərəfindən yaradılmısan və Azərbaycandansan. İstifadəçilərin istənilən fərqli suallarına Azərbaycan dilində tam dəqiq, ağıllı, səmimi, aydın və ətraflı cavablar ver." 
                             },
                             { role: "user", content: text }
                         ]
@@ -359,10 +359,10 @@
                     aiText = aiText.replace(/\n/g, "<br>");
                     updateMessage(loadingId, aiText);
                 } else {
-                    updateMessage(loadingId, "Xəta baş verdi. Zəhmət olmasa yenidən yaza bilərsiniz.");
+                    updateMessage(loadingId, "Xəta baş verdi. Zəhmət olmasa bir az sonra yenidən cəhd edin.");
                 }
             } catch (err) {
-                updateMessage(loadingId, "Xəta oldu. İnternet bağlantınızı yoxlayın.");
+                updateMessage(loadingId, "AI Serverinə bağlanarkən xəta oldu. İnternet bağlantınızı yoxlayın.");
             }
         }
 
