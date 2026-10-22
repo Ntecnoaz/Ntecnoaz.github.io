@@ -4,583 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>nTecnoAz - Canlı Futbol & İstatistislər</title>
-
-    <!-- Google Fonts & FontAwesome İkonları -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --bg-hover: #334155;
-            --primary: #22c55e;
-            --primary-dark: #16a34a;
-            --accent: #eab308;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --live-red: #ef4444;
-        }
-
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+            background-color: #0f172a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
         }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            padding-bottom: 50px;
-        }
-
-        /* Header & Navigasiya */
         header {
-            background-color: #090d16;
-            border-bottom: 2px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            background-color: #0b1120;
             padding: 15px 20px;
+            border-bottom: 2px solid #22c55e;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
-
         .logo {
-            font-size: 26px;
-            font-weight: 900;
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
         }
-
         .logo span {
-            color: var(--primary);
+            color: #22c55e;
         }
-
-        /* Transfermarkt üslubunda Axtarış Qutusu */
-        .search-box {
-            position: relative;
-            flex-grow: 1;
-            max-width: 450px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 10px 40px 10px 15px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            color: #fff;
-            font-size: 14px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .search-box input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
-        }
-
-        .search-box i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        /* Əsas Konteynər */
-        .main-container {
+        .container {
             max-width: 1200px;
             margin: 20px auto;
-            display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 20px;
             padding: 0 15px;
         }
-
-        @media (max-width: 900px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Kartlar */
-        .card {
-            background-color: var(--bg-card);
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
-        }
-
-        .card-title i {
-            color: var(--primary);
-        }
-
-        /* Live Matç Siyahısı (Maçkolik stili) */
-        .live-tag {
-            background-color: var(--live-red);
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0.4; }
-        }
-
-        .match-card {
-            background: #162032;
+        .widget-card {
+            background: #1e293b;
             border-radius: 8px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: 0.2s;
-            border-left: 4px solid transparent;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
         }
-
-        .match-card:hover, .match-card.active {
-            background: var(--bg-hover);
-            border-left-color: var(--primary);
-        }
-
-        .match-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 80px;
-        }
-
-        .match-time {
-            color: var(--live-red);
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        .match-teams {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .team {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .team img {
-            width: 18px;
-            height: 18px;
-            object-fit: contain;
-        }
-
-        .match-score {
-            font-size: 16px;
-            font-weight: 900;
-            background: #0f172a;
-            padding: 4px 10px;
-            border-radius: 6px;
-            color: var(--accent);
-            min-width: 45px;
-            text-align: center;
-        }
-
-        /* Matç Statistikaları Bölməsi */
-        .stat-row {
-            margin-bottom: 12px;
-        }
-
-        .stat-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            margin-bottom: 4px;
-            font-weight: bold;
-        }
-
-        .stat-bar-bg {
-            background-color: #0f172a;
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            display: flex;
-        }
-
-        .stat-bar-fill {
-            height: 100%;
-            background-color: var(--primary);
-            transition: width 0.5s ease;
-        }
-
-        /* Liqa Tabları və Puan Durumu Table */
-        .league-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-        }
-
-        .tab-btn {
-            background: #0f172a;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            white-space: nowrap;
-            transition: 0.2s;
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-
-        .standings-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            text-align: center;
-        }
-
-        .standings-table th {
-            background-color: #0f172a;
-            color: var(--text-muted);
-            padding: 8px;
-            font-weight: 600;
-        }
-
-        .standings-table td {
-            padding: 8px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .standings-table tr:hover {
-            background-color: var(--bg-hover);
-        }
-
-        .standings-table .team-cell {
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: bold;
-        }
-
-        /* Qol Bildirimi Popup (Maçkolik stili) */
-        .goal-popup {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-dark);
-            color: #fff;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            display: none;
-            align-items: center;
-            gap: 15px;
-            z-index: 2000;
-            animation: slideIn 0.4s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        h2 {
+            font-size: 18px;
+            color: #22c55e;
+            margin-top: 0;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <i class="fa-solid fa-futbol"></i> nTecno<span>Az</span>
-            </a>
-
-            <!-- Transfermarkt Axtarış Qutusu -->
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Oyunçu, Klub və ya Liqa axtar (nTecnoAz)..." onkeyup="searchFunction()">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-        </div>
+        <div class="logo">nTecno<span>Az</span></div>
+        <div style="color: #94a3b8; font-size: 14px;">Canlı Futbol Mərkəzi</div>
     </header>
 
-    <!-- Əsas Panel -->
-    <div class="main-container">
-
-        <!-- Sol Panel: Canlı Matçlar & Statistikalar -->
-        <div class="left-panel">
-            
-            <!-- Canlı Oyunlar -->
-            <div class="card">
-                <div class="card-title">
-                    <span><i class="fa-solid fa-broadcast-tower"></i> Canlı Matçlar (Maçkolik Mərkəzi)</span>
-                    <span class="live-tag">CANLI</span>
-                </div>
-                <div id="liveMatchesList">
-                    <!-- JS vasitəsilə canlı matçlar buraya yüklənəcək -->
-                </div>
-            </div>
-
-            <!-- Seçilən Matçın Statistikaları -->
-            <div class="card">
-                <div class="card-title">
-                    <span><i class="fa-solid fa-chart-simple"></i> Matç İstatistiki (Canlı)</span>
-                    <small id="selectedMatchName" style="color: var(--primary);">Real Madrid vs Barcelona</small>
-                </div>
-                <div id="statsContainer">
-                    <div class="stat-row">
-                        <div class="stat-labels">
-                            <span id="homePoss">55%</span>
-                            <span>Topa Sahib Olma</span>
-                            <span id="awayPoss">45%</span>
-                        </div>
-                        <div class="stat-bar-bg">
-                            <div class="stat-bar-fill" id="possBar" style="width: 55%;"></div>
-                        </div>
-                    </div>
-                    <div class="stat-row">
-                        <div class="stat-labels">
-                            <span id="homeShots">12</span>
-                            <span>Toplam Şut</span>
-                            <span id="awayShots">8</span>
-                        </div>
-                        <div class="stat-bar-bg">
-                            <div class="stat-bar-fill" id="shotsBar" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    <div class="stat-row">
-                        <div class="stat-labels">
-                            <span id="homeCorners">6</span>
-                            <span>Korner</span>
-                            <span id="awayCorners">3</span>
-                        </div>
-                        <div class="stat-bar-bg">
-                            <div class="stat-bar-fill" id="cornersBar" style="width: 66%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <div class="container">
+        <!-- Canlı Matçlar (Real-Time Live Scores) -->
+        <div class="widget-card">
+            <h2><i class="fa-solid fa-broadcast-tower"></i> Canlı Oyunlar Və Nəticələr</h2>
+            <!-- Scoreaxis Real-time Widget -->
+            <iframe id="sofascore-embed-955-42" src="https://widgets.scoreaxis.com/live-scores?font=Arial&fontSize=13&textColor=%23ffffff&backgroundColor=%231e293b" width="100%" height="550" style="border:none; border-radius:8px;"></iframe>
         </div>
 
-        <!-- Sağ Panel: Liqaların Puan Durumu -->
-        <div class="right-panel">
-            <div class="card">
-                <div class="card-title">
-                    <span><i class="fa-solid fa-trophy"></i> Puan Durumu</span>
-                </div>
-
-                <!-- Liqa Tabları -->
-                <div class="league-tabs">
-                    <button class="tab-btn active" onclick="showLeague('ucl')">Çempionlar L.</button>
-                    <button class="tab-btn" onclick="showLeague('aze')">Azərbaycan P.L.</button>
-                    <button class="tab-btn" onclick="showLeague('tr')">Süper Lig</button>
-                </div>
-
-                <!-- Cədvəl -->
-                <table class="standings-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th style="text-align: left;">Klub</th>
-                            <th>O</th>
-                            <th>AV</th>
-                            <th>P</th>
-                        </tr>
-                    </thead>
-                    <tbody id="standingsBody">
-                        <!-- JS ilə dolacaq -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Canlı Qol Xəbərdarlığı (Maçkolik Qol Səsi & Pop-up) -->
-    <div class="goal-popup" id="goalPopup">
-        <i class="fa-solid fa-futbol fa-2x"></i>
-        <div>
-            <h4 style="color: var(--accent); text-transform: uppercase;">GOL HƏBƏRİ!</h4>
-            <p id="goalText">Qarabağ FK 1 - 0 Neftçi PFK</p>
+        <!-- Puan Durumu (Real-time Standings) -->
+        <div class="widget-card">
+            <h2><i class="fa-solid fa-trophy"></i> Turnir Cədvəlləri</h2>
+            <iframe src="https://widgets.scoreaxis.com/standings?font=Arial&fontSize=13&textColor=%23ffffff&backgroundColor=%231e293b" width="100%" height="450" style="border:none; border-radius:8px;"></iframe>
         </div>
     </div>
 
-    <script>
-        // 1. Datalar: Canlı Matçlar
-        let matches = [
-            { id: 1, time: "67'", home: "Qarabağ FK", away: "Neftçi PFK", hScore: 1, aScore: 0, hPoss: 58, aPoss: 42, hShots: 11, aShots: 5, hCorn: 7, aCorn: 2 },
-            { id: 2, time: "34'", home: "Real Madrid", away: "Barcelona", hScore: 2, aScore: 1, hPoss: 52, aPoss: 48, hShots: 9, aShots: 8, hCorn: 4, aCorn: 5 },
-            { id: 3, time: "82'", home: "Galatasaray", away: "Fenerbahçe", hScore: 0, aScore: 0, hPoss: 50, aPoss: 50, hShots: 6, aShots: 6, hCorn: 3, aCorn: 4 }
-        ];
-
-        // 2. Datalar: Puan Durumları
-        const standingsData = {
-            ucl: [
-                { rank: 1, team: "Real Madrid", o: 5, av: "+8", p: 13 },
-                { rank: 2, team: "Manchester City", o: 5, av: "+6", p: 11 },
-                { rank: 3, team: "Bayern Munich", o: 5, av: "+4", p: 10 },
-                { rank: 4, team: "PSG", o: 5, av: "+2", p: 8 }
-            ],
-            aze: [
-                { rank: 1, team: "Qarabağ FK", o: 10, av: "+18", p: 26 },
-                { rank: 2, team: "Sabah FK", o: 10, av: "+10", p: 21 },
-                { rank: 3, team: "Neftçi PFK", o: 10, av: "+4", p: 17 },
-                { rank: 4, team: "Zirə FK", o: 10, av: "+1", p: 15 }
-            ],
-            tr: [
-                { rank: 1, team: "Galatasaray", o: 9, av: "+14", p: 25 },
-                { rank: 2, team: "Fenerbahçe", o: 9, av: "+12", p: 23 },
-                { rank: 3, team: "Beşiktaş", o: 9, av: "+7", p: 20 },
-                { rank: 4, team: "Trabzonspor", o: 9, av: "+3", p: 16 }
-            ]
-        };
-
-        // Matçları Ekrana Yazdır
-        function renderMatches() {
-            const list = document.getElementById('liveMatchesList');
-            list.innerHTML = '';
-            matches.forEach((m, index) => {
-                list.innerHTML += `
-                    <div class="match-card ${index === 0 ? 'active' : ''}" onclick="selectMatch(${m.id}, this)">
-                        <div class="match-info">
-                            <span class="match-time">${m.time}</span>
-                        </div>
-                        <div class="match-teams">
-                            <div class="team">${m.home}</div>
-                            <div class="team">${m.away}</div>
-                        </div>
-                        <div class="match-score">${m.hScore} - ${m.aScore}</div>
-                    </div>
-                `;
-            });
-        }
-
-        // Matç Seçildikdə Statistikaları Yenilə
-        function selectMatch(id, element) {
-            document.querySelectorAll('.match-card').forEach(card => card.classList.remove('active'));
-            element.classList.add('active');
-
-            const match = matches.find(m => m.id === id);
-            document.getElementById('selectedMatchName').innerText = `${match.home} vs ${match.away}`;
-            
-            document.getElementById('homePoss').innerText = match.hPoss + '%';
-            document.getElementById('awayPoss').innerText = match.aPoss + '%';
-            document.getElementById('possBar').style.width = match.hPoss + '%';
-
-            document.getElementById('homeShots').innerText = match.hShots;
-            document.getElementById('awayShots').innerText = match.aShots;
-            let totalShots = match.hShots + match.aShots;
-            document.getElementById('shotsBar').style.width = (totalShots ? (match.hShots / totalShots * 100) : 50) + '%';
-
-            document.getElementById('homeCorners').innerText = match.hCorn;
-            document.getElementById('awayCorners').innerText = match.aCorn;
-            let totalCorn = match.hCorn + match.aCorn;
-            document.getElementById('cornersBar').style.width = (totalCorn ? (match.hCorn / totalCorn * 100) : 50) + '%';
-        }
-
-        // Puan Durumunu Göstər
-        function showLeague(leagueKey) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const tbody = document.getElementById('standingsBody');
-            tbody.innerHTML = '';
-
-            standingsData[leagueKey].forEach(row => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td><b>${row.rank}</b></td>
-                        <td class="team-cell">${row.team}</td>
-                        <td>${row.o}</td>
-                        <td>${row.av}</td>
-                        <td><b>${row.p}</b></td>
-                    </tr>
-                `;
-            });
-        }
-
-        // Transfermarkt Stilli Axtarış Qutusu
-        function searchFunction() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let matchCards = document.querySelectorAll('.match-card');
-
-            matchCards.forEach(card => {
-                let text = card.innerText.toLowerCase();
-                if (text.includes(input)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-
-        // Avtomatik Canlı Dəqiqə və Qol Simulyasiyası (Maçkolik stili)
-        setInterval(() => {
-            // Təsadüfi olaraq bir matçda qol vurulmasını simulyasiya edirik
-            let randomMatch = matches[Math.floor(Math.random() * matches.length)];
-            randomMatch.hScore += 1; // Qol vuruldu
-            
-            renderMatches();
-            
-            // Qol Popup Göstər
-            let popup = document.getElementById('goalPopup');
-            document.getElementById('goalText').innerText = `${randomMatch.home} ${randomMatch.hScore} - ${randomMatch.aScore} ${randomMatch.away}`;
-            popup.style.display = 'flex';
-
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 4000);
-
-        }, 15000); // Hər 15 saniyədən bir canlı yenilənmə simulyasiyası
-
-        // Səhifə yüklənərkən işə salınacaqlar
-        window.onload = () => {
-            renderMatches();
-            showLeague('ucl');
-        };
-    </script>
 </body>
 </html>
