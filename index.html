@@ -38,7 +38,6 @@
             overflow: hidden;
         }
 
-        /* Top Header */
         header {
             background: #030712;
             border-bottom: 1px solid var(--border);
@@ -87,7 +86,6 @@
             transform: scale(1.05);
         }
 
-        /* Avatar Selector Bar */
         .avatar-bar {
             background: #0d1322;
             padding: 10px;
@@ -116,13 +114,6 @@
             background: var(--primary-glow);
         }
 
-        .avatar-option img {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-        }
-
-        /* Chat Container */
         .chat-container {
             flex: 1;
             padding: 20px;
@@ -138,7 +129,7 @@
         .message {
             display: flex;
             gap: 12px;
-            max-width: 80%;
+            max-width: 85%;
             animation: fadeIn 0.3s ease;
         }
 
@@ -190,7 +181,6 @@
             border-bottom-left-radius: 2px;
         }
 
-        /* Input Box */
         .input-area {
             background: #030712;
             border-top: 1px solid var(--border);
@@ -249,7 +239,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="brand-logo">
             <i class="fa-solid fa-robot" style="color: var(--primary);"></i> nTecno<span>Az</span>
@@ -257,14 +246,12 @@
 
         <div class="header-right">
             <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">TecnoGPT AI</span>
-            <!-- TikTok Owner Link -->
             <a href="https://www.tiktok.com/@rehimovv111" target="_blank" class="tiktok-owner-btn">
                 <i class="fa-brands fa-tiktok"></i> Sayt sahibi
             </a>
         </div>
     </header>
 
-    <!-- Avatar Selection (Panda & Frog) -->
     <div class="avatar-bar">
         <div class="avatar-option active" id="avatarPanda" onclick="selectAvatar('panda')">
             <span>🐼 TecnoPanda AI</span>
@@ -274,21 +261,18 @@
         </div>
     </div>
 
-    <!-- Chat Messages -->
     <div class="chat-container" id="chatContainer">
-        <!-- Initial Bot Welcome Message -->
         <div class="message bot">
             <div class="msg-avatar" id="botAvatarIcon">🐼</div>
             <div class="msg-content">
-                Salam! Mən <b>TecnoGPT</b> ağıllı süni intellekt köməkçisiyəm. Mənə istənilən sualı verə bilərsən, sənə kömək etməkdən şad olaram! 😊
+                Salam! Mən <b>TecnoGPT</b> süni intellekt köməkçisiyəm. Nə soruşmaq istəyirsənsə yaz, sənə canlı cavab verim! 😊
             </div>
         </div>
     </div>
 
-    <!-- Input Area -->
     <div class="input-area">
         <div class="input-box-wrapper">
-            <input type="text" id="userInput" placeholder="TecnoGPT-yə bir sual ver..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="userInput" placeholder="TecnoGPT-yə mesaj yaz..." onkeypress="handleKeyPress(event)">
             <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
@@ -319,15 +303,13 @@
             const text = input.value.trim();
             if (!text) return;
 
-            // Render User Message
             addMessage(text, 'user', '👤');
             input.value = '';
 
-            // AI Processing Response
             setTimeout(() => {
                 const response = generateAIResponse(text);
                 addMessage(response, 'bot', currentAvatar);
-            }, 600);
+            }, 400);
         }
 
         function addMessage(text, sender, avatarIcon) {
@@ -344,42 +326,63 @@
             container.scrollTop = container.scrollHeight;
         }
 
-        // Intelligently Process Questions & Special Rules
+        // Genişləndirilmiş Ağıllı Çat Alqoritmi
         function generateAIResponse(query) {
-            const q = query.toLowerCase();
+            const q = query.toLowerCase().trim();
 
-            // Special Identity Rules
-            if (q.includes("seni kim") || q.includes("səni kim") || q.includes("qurub") || q.includes("yaradib") || q.includes("sahibin")) {
+            // Məcburi Xüsusi Qaydalar
+            if (q.includes("seni kim") || q.includes("səni kim") || q.includes("qurub") || q.includes("yaradib") || q.includes("yaradıb") || q.includes("sahibin")) {
                 return "Məni <b>Nicat Rəhimli</b> yaradıb.";
             }
 
-            if (q.includes("hansi olke") || q.includes("hansı ölkə") || q.includes("haradansan") || q.includes("hardansan") || q.includes("haralisan")) {
+            if (q.includes("hansi olke") || q.includes("hansı ölkə") || q.includes("haradansan") || q.includes("hardansan") || q.includes("haralisan") || q.includes("ölkədənsən")) {
                 return "Mən <b>Azərbaycan</b> ölkəsindənmən!";
             }
 
             if (q.includes("adin ne") || q.includes("adın nə") || q.includes("kimsen") || q.includes("kimsən")) {
-                return "Mənim adım <b>TecnoGPT</b>-dir. nTecnoAz brendi altında yaradılmış ağıllı yapay zeka köməkçisiyəm.";
+                return "Mənim adım <b>TecnoGPT</b>-dir. nTecnoAz brendi üçün yaradılmış süni intellektəm.";
             }
 
-            // General Conversational Answers
-            if (q.includes("salam") || q.includes("necesen") || q.includes("necəsən") || q.includes("salamlar")) {
-                return "Salam! Çox sağ olun, mən əla işləyirəm. Siz necəsiniz? Sizə necə kömək edə bilərəm?";
+            // Kömək Və Danışıq Istəkləri
+            if (q.includes("komek") || q.includes("kömək") || q.includes("ne ede bilersen") || q.includes("nə edə bilərsən")) {
+                return "Sənə hər mövzuda kömək edə bilərəm! Məsələn: oyunlar, kompyuter formatı və FPS artırma, proqramlaşdırma, kod yazmaq və ya sadəcə maraqlı sohbet etmək! Nə lazımdırsa soruş.";
             }
 
-            if (q.includes("sağ ol") || q.includes("sagol") || q.includes("təşəkkür") || q.includes("tesekkur")) {
-                return "Xoşdur! Hər zaman xidmətinizdəyəm. Başqa bir sualınız var?";
+            if (q.includes("yaxsi") || q.includes("yaxşı") || q.includes("ok") || q.includes("oldu") || q.includes("super") || q.includes("ela") || q.includes("əla")) {
+                const polite = [
+                    "Əla! Başqa nə bilmək istəyirsən?",
+                    "Çox gözəl! Növbəti sualını gözləyirəm 😊",
+                    "Həmişə xidmətindəyəm! Sualın varsa buyur yaz.",
+                    "Əla, başqa necə kömək edə bilərəm?"
+                ];
+                return polite[Math.floor(Math.random() * polite.length)];
             }
 
-            if (q.includes("oyun") || q.includes("game") || q.includes("fps") || q.includes("minecraft") || q.includes("pubg")) {
-                return "Oyunlar və sistem optimizasiyası haqqında suallarınızı cavablandırmağa hazıram! FPS artırmaq, server sazlamaları və ya sistem tələbləri barədə nə bilmək istəyirsiniz?";
+            if (q.includes("salam") || q.includes("slm") || q.includes("salamlar")) {
+                return "Salam! Xoş gəldiniz. Bu gün sənə necə kömək edə bilərəm?";
             }
 
-            if (q.includes("kod") || q.includes("html") || q.includes("sayt") || q.includes("program")) {
-                return "Mən veb proqramlaşdırma, HTML, CSS və JavaScript kodları yazmaqda çox yaxşıyam! Hansı kodu hazırlamağımı istəyirsiniz?";
+            if (q.includes("necesen") || q.includes("necəsən") || q.includes("ne var ne yox") || q.includes("keyf")) {
+                return "Çox sağ ol, mən əlayam! Sən necəsən? Günün necə keçir?";
             }
 
-            // Default Smart AI Response
-            return `Sualınız üçün təşəkkür edirəm! "${query}" mövzusunda sizə kömək edə bilərəm. TecnoGPT olaraq daha ətraflı məlumat almaq üçün konkret nəsə soruşa bilərsiniz! 😊`;
+            if (q.includes("sagol") || q.includes("sağol") || q.includes("tesekkur") || q.includes("təşəkkür")) {
+                return "Buyurun, xoşdur! İstədiyin vaxt yenidən yaza bilərsən! 😇";
+            }
+
+            if (q.includes("ne edirsen") || q.includes("nə edirsən")) {
+                return "Sənin suallarını gözləyirəm və kömək etməyə hazıram! Sən nə edirsən?";
+            }
+
+            // Təsadüfi Zəngin Cavab Generasiyası (Hər dəfə eyni təkrar olmasın deyə)
+            const randomAnswers = [
+                `Anladım! "${query}" mövzusunda daha dəqiq nə öyrənmək istəyirsən? Ətraflı yaz, sənə kömək edim!`,
+                `Maraqlıdır! Bu haqda sənə böyük məmnuniyyətlə kömək edərəm. Konkret nəyi bilmək istəyirsən?`,
+                `Əla sualdır! Bu mövzuda nəyi izah etməyimi istəyirsən?`,
+                `Səni dinləyirəm! Fikrini bir az da açıq yazsan, tam dəqiq cavab verərəm.`
+            ];
+
+            return randomAnswers[Math.floor(Math.random() * randomAnswers.length)];
         }
     </script>
 </body>
