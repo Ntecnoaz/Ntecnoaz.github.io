@@ -1,73 +1,656 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nTecnoAz - Canlı Futbol & İstatistislər</title>
+    <title>nTecnoAz — Next-Gen Hardware & Gaming Ecosystem</title>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body {
+        :root {
+            --bg-dark: #030712;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --accent: #10b981;
+            --purple: #8b5cf6;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #0f172a;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+        }
+
+        /* Glassmorphism Header */
         header {
-            background-color: #0b1120;
-            padding: 15px 20px;
-            border-bottom: 2px solid #22c55e;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(16px);
+            background: rgba(3, 7, 18, 0.75);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
+
+        .brand {
             font-size: 24px;
-            font-weight: bold;
-            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .logo span {
-            color: #22c55e;
+
+        .brand i {
+            color: var(--primary);
+            filter: drop-shadow(0 0 8px var(--primary));
         }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
+
+        .brand span {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .widget-card {
-            background: #1e293b;
-            border-radius: 8px;
-            padding: 15px;
+
+        /* Language Switcher Dropdown */
+        .lang-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 20px;
+        }
+
+        .lang-container i {
+            color: var(--primary);
+        }
+
+        select {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select option {
+            background: #111827;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 70px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--primary-glow);
+            color: #60a5fa;
+            font-size: 13px;
+            font-weight: 600;
             margin-bottom: 20px;
-            border: 1px solid #334155;
         }
-        h2 {
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
             font-size: 18px;
-            color: #22c55e;
-            margin-top: 0;
+            line-height: 1.6;
+        }
+
+        /* Search & Filter Bar */
+        .search-wrapper {
+            max-width: 700px;
+            margin: 30px auto 20px;
+            position: relative;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 18px 25px 18px 55px;
+            border-radius: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 25px var(--primary-glow);
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .cat-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cat-btn:hover, .cat-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* Main Container */
+        .main-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--purple));
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-tag {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            width: fit-content;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Interactive FPS Calculator Widget Section */
+        .calculator-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .calc-box {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(31, 41, 55, 0.8));
+            border: 1px solid var(--primary-glow);
+            border-radius: 24px;
+            padding: 35px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        @media (max-width: 850px) {
+            .calc-box { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 36px; }
+        }
+
+        .calc-inputs select {
+            width: 100%;
+            padding: 14px;
+            background: #0b0f19;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .fps-display {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+        }
+
+        .fps-number {
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Code Copy Box */
+        .code-box {
+            background: #0b0f19;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #38bdf8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--purple);
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <header>
-        <div class="logo">nTecno<span>Az</span></div>
-        <div style="color: #94a3b8; font-size: 14px;">Canlı Futbol Mərkəzi</div>
-    </header>
-
-    <div class="container">
-        <!-- Canlı Matçlar (Real-Time Live Scores) -->
-        <div class="widget-card">
-            <h2><i class="fa-solid fa-broadcast-tower"></i> Canlı Oyunlar Və Nəticələr</h2>
-            <!-- Scoreaxis Real-time Widget -->
-            <iframe id="sofascore-embed-955-42" src="https://widgets.scoreaxis.com/live-scores?font=Arial&fontSize=13&textColor=%23ffffff&backgroundColor=%231e293b" width="100%" height="550" style="border:none; border-radius:8px;"></iframe>
+        <div class="brand">
+            <i class="fa-solid fa-bolt"></i>
+            nTecno<span>Az</span>
         </div>
 
-        <!-- Puan Durumu (Real-time Standings) -->
-        <div class="widget-card">
-            <h2><i class="fa-solid fa-trophy"></i> Turnir Cədvəlləri</h2>
-            <iframe src="https://widgets.scoreaxis.com/standings?font=Arial&fontSize=13&textColor=%23ffffff&backgroundColor=%231e293b" width="100%" height="450" style="border:none; border-radius:8px;"></iframe>
+        <!-- Language Switcher -->
+        <div class="lang-container">
+            <i class="fa-solid fa-globe"></i>
+            <select id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="en" selected>English (US)</option>
+                <option value="az">Azərbaycan</option>
+                <option value="tr">Türkçe</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Hero Title -->
+    <section class="hero">
+        <div class="badge">
+            <i class="fa-solid fa-microchip"></i>
+            <span id="badgeText">Powered by nTecnoAz Engine v4.0</span>
+        </div>
+        <h1 id="heroTitle">Next-Gen Hardware & Gaming Ecosystem</h1>
+        <p id="heroDesc">Explore hyper-optimized system tweaks, real-time FPS benchmarks, and powerful tech utilities with zero friction.</p>
+
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search games, tweaks, or hardware specs..." onkeyup="filterCards()">
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <div class="categories">
+        <button class="cat-btn active" onclick="filterCat('all', this)" id="btnAll">All Systems</button>
+        <button class="cat-btn" onclick="filterCat('game', this)" id="btnGame">Game Benchmarks</button>
+        <button class="cat-btn" onclick="filterCat('opt', this)" id="btnOpt">FPS Boost & Tweaks</button>
+        <button class="cat-btn" onclick="filterCat('tool', this)" id="btnTool">Software & Tools</button>
+    </div>
+
+    <!-- Interactive FPS Calculator Section -->
+    <div class="calculator-section">
+        <div class="calc-box">
+            <div class="calc-inputs">
+                <h2 style="margin-bottom: 8px;" id="calcTitle">⚡ Real-Time FPS Estimator</h2>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;" id="calcDesc">Select your specs to calculate estimated performance:</p>
+                
+                <select id="gpuSelect" onchange="calculateFPS()">
+                    <option value="30">NVIDIA GTX 1050 Ti / GTX 960 (Budget)</option>
+                    <option value="60" selected>NVIDIA GTX 1660 Super / RTX 2060 (Mid-Range)</option>
+                    <option value="110">NVIDIA RTX 3070 / RTX 4070 (High-End)</option>
+                </select>
+
+                <select id="ramSelect" onchange="calculateFPS()">
+                    <option value="0.8">8 GB RAM (Basic)</option>
+                    <option value="1.0" selected>16 GB RAM (Recommended)</option>
+                    <option value="1.25">32 GB RAM (Ultra Fast)</option>
+                </select>
+            </div>
+
+            <div class="fps-display">
+                <div style="font-size: 13px; color: var(--text-muted); font-weight: 700;" id="estLabel">ESTIMATED AVERAGE FPS</div>
+                <div class="fps-number" id="fpsOutput">90 FPS</div>
+                <div style="font-size: 12px; color: var(--accent); margin-top: 5px;" id="statusLabel">Smooth Performance Guarantee</div>
+            </div>
         </div>
     </div>
 
+    <!-- Main Content Cards -->
+    <main class="main-grid" id="cardContainer">
+
+        <!-- Card 1 -->
+        <div class="card" data-cat="game">
+            <div>
+                <div class="card-tag" id="tag1">BENCHMARK</div>
+                <h3 id="c1Title">Red Dead Redemption 2</h3>
+                <p id="c1Desc">Ultra-detailed open-world optimization guide. Get stable 60+ FPS on mid-range hardware with optimized settings.</p>
+            </div>
+            <div class="card-footer">
+                <span style="color: var(--primary);" id="c1Stat">Rec: 16 GB RAM</span>
+                <span style="color: var(--accent);">DirectX 12</span>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" data-cat="opt">
+            <div>
+                <div class="card-tag" style="color: var(--purple); background: rgba(139,92,246,0.1);" id="tag2">TWEAK</div>
+                <h3 id="c2Title">Windows RAM Cache Cleaner</h3>
+                <p id="c2Desc">Instantly flush standby RAM memory and lower background process CPU usage with one click script.</p>
+                
+                <div class="code-box">
+                    <span>%temp% & prefetch clean</span>
+                    <button class="copy-btn" onclick="copyCode('echo Cleaned! && pause')">Copy</button>
+                </div>
+            </div>
+            <div class="card-footer" style="margin-top: 15px;">
+                <span style="color: var(--purple);" id="c2Stat">Gain: +15% FPS</span>
+                <span>Safe Script</span>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" data-cat="tool">
+            <div>
+                <div class="card-tag" style="color: #38bdf8; background: rgba(56,189,248,0.1);" id="tag3">UTILITY</div>
+                <h3 id="c3Title">Lively Wallpaper Studio</h3>
+                <p id="c3Desc">Transform your desktop with GPU-accelerated live wallpapers without eating up system performance.</p>
+            </div>
+            <div class="card-footer">
+                <span style="color: #38bdf8;" id="c3Stat">Open Source</span>
+                <span>Low VRAM</span>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" data-cat="game">
+            <div>
+                <div class="card-tag" id="tag4">EMULATION</div>
+                <h3 id="c4Title">PUBG Mobile Gameloop Engine</h3>
+                <p id="c4Desc">Unlock 90 FPS ultra-smooth mode by enabling Hardware Virtualization (VT) in motherboard BIOS.</p>
+            </div>
+            <div class="card-footer">
+                <span style="color: var(--primary);" id="c4Stat">VT Enabled</span>
+                <span style="color: var(--accent);">90 FPS</span>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card" data-cat="tool">
+            <div>
+                <div class="card-tag" style="color: #38bdf8; background: rgba(56,189,248,0.1);" id="tag5">CROSSPLAY</div>
+                <h3 id="c5Title">GeyserMC & Floodgate Hub</h3>
+                <p id="c5Desc">Connect Minecraft Bedrock (Mobile/Tablet) and Java (PC) players seamlessly on single server node.</p>
+            </div>
+            <div class="card-footer">
+                <span style="color: #38bdf8;" id="c5Stat">Aternos Ready</span>
+                <span>Cross-Platform</span>
+            </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card" data-cat="opt">
+            <div>
+                <div class="card-tag" style="color: var(--purple); background: rgba(139,92,246,0.1);" id="tag6">OPTIMIZATION</div>
+                <h3 id="c6Title">Resident Evil Revelations 2</h3>
+                <p id="c6Desc">Maximum performance config for budget PCs. Smooth 60 FPS output on low-spec systems.</p>
+            </div>
+            <div class="card-footer">
+                <span style="color: var(--purple);" id="c6Stat">Low GPU Load</span>
+                <span>1080p Ready</span>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Dictionary for 4 Languages
+        const i18n = {
+            en: {
+                badge: "Powered by nTecnoAz Engine v4.0",
+                heroTitle: "Next-Gen Hardware & Gaming Ecosystem",
+                heroDesc: "Explore hyper-optimized system tweaks, real-time FPS benchmarks, and powerful tech utilities with zero friction.",
+                searchPh: "Search games, tweaks, or hardware specs...",
+                btnAll: "All Systems", btnGame: "Game Benchmarks", btnOpt: "FPS Boost & Tweaks", btnTool: "Software & Tools",
+                calcTitle: "⚡ Real-Time FPS Estimator", calcDesc: "Select your specs to calculate estimated performance:",
+                estLabel: "ESTIMATED AVERAGE FPS", statusLabel: "Smooth Performance Guarantee",
+                c1Title: "Red Dead Redemption 2", c1Desc: "Ultra-detailed open-world optimization guide. Get stable 60+ FPS on mid-range hardware with optimized settings.",
+                c2Title: "Windows RAM Cache Cleaner", c2Desc: "Instantly flush standby RAM memory and lower background process CPU usage with one click script.",
+                c3Title: "Lively Wallpaper Studio", c3Desc: "Transform your desktop with GPU-accelerated live wallpapers without eating up system performance.",
+                c4Title: "PUBG Mobile Gameloop Engine", c4Desc: "Unlock 90 FPS ultra-smooth mode by enabling Hardware Virtualization (VT) in motherboard BIOS.",
+                c5Title: "GeyserMC & Floodgate Hub", c5Desc: "Connect Minecraft Bedrock (Mobile/Tablet) and Java (PC) players seamlessly on single server node.",
+                c6Title: "Resident Evil Revelations 2", c6Desc: "Maximum performance config for budget PCs. Smooth 60 FPS output on low-spec systems."
+            },
+            az: {
+                badge: "nTecnoAz Engine v4.0 tərəfindən dəstəklənir",
+                heroTitle: "Yeni Nəsil Avadanlıq və Oyun Ekosistemi",
+                heroDesc: "Optimizasiya edilmiş sistem ayarlarını, canlı FPS testlərini və güclü texnoloji alətləri kəşf edin.",
+                searchPh: "Oyun, ayar və ya kompyuter göstəricisi axtar...",
+                btnAll: "Bütün Sistemlər", btnGame: "Oyun Testləri", btnOpt: "FPS Artırma & Format", btnTool: "Proqramlar & Alətlər",
+                calcTitle: "⚡ Canlı FPS Hesablayıcı", calcDesc: "Kompyuter göstəricilərini seçərək orta FPS dəyərini görün:",
+                estLabel: "TƏHMİNİ ORTA FPS", statusLabel: "Səlis Performans Zəmanəti",
+                c1Title: "Red Dead Redemption 2", c1Desc: "Açıq dünya üçün ətraflı optimizasiya təlimatı. Orta güclü kompyuterdə sabit 60+ FPS əldə edin.",
+                c2Title: "Windows RAM Keş Təmizləyici", c2Desc: "Tək kliklə arxa fondakı lüzumsuz RAM yaddaşını və CPU yükünü dərhal azaldın.",
+                c3Title: "Lively Wallpaper Studiyası", c3Desc: "Kompyuteri yormadan masaüstünə canlı geyminq videolardan ibarət divar kağızları qoyun.",
+                c4Title: "PUBG Mobile Gameloop Motoru", c4Desc: "Ana platada BIOS-dan Virtualization (VT) açaraq ultra hamar 90 FPS rejimini aktivləşdirin.",
+                c5Title: "GeyserMC & Floodgate Mərkəzi", c5Desc: "Minecraft Bedrock (Telefon) və Java (PC) oyunçularını bir serverə qoşun.",
+                c6Title: "Resident Evil Revelations 2", c6Desc: "Zəif kompyuterlər üçün maksimum performans konfiqurasiyası. 60 FPS təminatı."
+            },
+            tr: {
+                badge: "nTecnoAz Engine v4.0 ile Güçlendirildi",
+                heroTitle: "Yeni Nesil Donanım ve Oyun Ekosistemi",
+                heroDesc: "Süper optimize sistem ayarlarını, canlı FPS testlerini ve güçlü teknoloji araçlarını keşfedin.",
+                searchPh: "Oyun, ayar veya donanım ara...",
+                btnAll: "Tüm Sistemler", btnGame: "Oyun Testleri", btnOpt: "FPS Artırma & Ayarlar", btnTool: "Yazılım & Araçlar",
+                calcTitle: "⚡ Canlı FPS Hesaplayıcı", calcDesc: "Sistem bileşenlerinizi seçerek ortalama FPS'inizi hesaplayın:",
+                estLabel: "TAHMİNİ ORTALAMA FPS", statusLabel: "Akıcı Performans Garantisi",
+                c1Title: "Red Dead Redemption 2", c1Desc: "Açık dünya optimizasyon rehberi. Orta seviye donanımda kararlı 60+ FPS elde edin.",
+                c2Title: "Windows RAM Bellek Temizleyici", c2Desc: "Tek tıkla arka plandaki gereksiz RAM ve CPU kullanımını anında temizleyin.",
+                c3Title: "Lively Wallpaper Stüdyosu", c3Desc: "Sistemi yormadan masaüstünüze canlı hareketli duvar kağıtları ekleyin.",
+                c4Title: "PUBG Mobile Gameloop Motoru", c4Desc: "BIOS'tan Sanallaştırmayı (VT) açarak ultra akıcı 90 FPS modunu aktif edin.",
+                c5Title: "GeyserMC & Floodgate Merkezi", c5Desc: "Minecraft Bedrock (Mobil) ve Java (PC) oyuncularını tek bir sunucuda birleştirin.",
+                c6Title: "Resident Evil Revelations 2", c6Desc: "Düşük bütçeli sistemler için maksimum performans ayarları. Akıcı 60 FPS."
+            },
+            ru: {
+                badge: "Работает на базе nTecnoAz Engine v4.0",
+                heroTitle: "Игровая и Аппаратная Экосистема Нового Поколения",
+                heroDesc: "Исследуйте оптимизированные настройки системы, тесты FPS и мощные утилиты без задержек.",
+                searchPh: "Поиск игр, настроек или железа...",
+                btnAll: "Все Системы", btnGame: "Тесты Игр", btnOpt: "FPS Оптимизация", btnTool: "Софт и Утилиты",
+                calcTitle: "⚡ Калькулятор FPS", calcDesc: "Выберите ваши комплектующие для расчета FPS:",
+                estLabel: "РАСЧЕТНЫЙ СРЕДНИЙ FPS", statusLabel: "Гарантия Плавности",
+                c1Title: "Red Dead Redemption 2", c1Desc: "Подробный гайд по оптимизации. Получите стабильные 60+ FPS на средних ПК.",
+                c2Title: "Очистка Кэша RAM Windows", c2Desc: "Мгновенный сброс оперативной памяти и снижение нагрузки на ЦП в один клик.",
+                c3Title: "Lively Wallpaper Студия", c3Desc: "Живые обои на рабочий стол без потери производительности системы.",
+                c4Title: "PUBG Mobile Gameloop Движок", c4Desc: "Включите виртуализацию (VT) в BIOS для активации режима 90 FPS.",
+                c5Title: "GeyserMC & Floodgate Центр", c5Desc: "Объедините игроков Minecraft Bedrock (Телефоны) и Java (ПК) на одном сервере.",
+                c6Title: "Resident Evil Revelations 2", c6Desc: "Максимальная производительность для слабых ПК. Плавные 60 FPS."
+            }
+        };
+
+        // Language Switcher Function
+        function changeLanguage(lang) {
+            const data = i18n[lang];
+            document.getElementById('badgeText').innerText = data.badge;
+            document.getElementById('heroTitle').innerText = data.heroTitle;
+            document.getElementById('heroDesc').innerText = data.heroDesc;
+            document.getElementById('searchInput').placeholder = data.searchPh;
+            
+            document.getElementById('btnAll').innerText = data.btnAll;
+            document.getElementById('btnGame').innerText = data.btnGame;
+            document.getElementById('btnOpt').innerText = data.btnOpt;
+            document.getElementById('btnTool').innerText = data.btnTool;
+
+            document.getElementById('calcTitle').innerText = data.calcTitle;
+            document.getElementById('calcDesc').innerText = data.calcDesc;
+            document.getElementById('estLabel').innerText = data.estLabel;
+            document.getElementById('statusLabel').innerText = data.statusLabel;
+
+            document.getElementById('c1Title').innerText = data.c1Title; document.getElementById('c1Desc').innerText = data.c1Desc;
+            document.getElementById('c2Title').innerText = data.c2Title; document.getElementById('c2Desc').innerText = data.c2Desc;
+            document.getElementById('c3Title').innerText = data.c3Title; document.getElementById('c3Desc').innerText = data.c3Desc;
+            document.getElementById('c4Title').innerText = data.c4Title; document.getElementById('c4Desc').innerText = data.c4Desc;
+            document.getElementById('c5Title').innerText = data.c5Title; document.getElementById('c5Desc').innerText = data.c5Desc;
+            document.getElementById('c6Title').innerText = data.c6Title; document.getElementById('c6Desc').innerText = data.c6Desc;
+        }
+
+        // Live Search Filter
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                card.style.display = text.includes(input) ? "flex" : "none";
+            });
+        }
+
+        // Category Filter
+        let currentCat = 'all';
+        function filterCat(category, btn) {
+            currentCat = category;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                let cat = card.getAttribute('data-cat');
+                card.style.display = (category === 'all' || cat === category) ? "flex" : "none";
+            });
+        }
+
+        // FPS Calculator Algorithm
+        function calculateFPS() {
+            let gpu = parseFloat(document.getElementById('gpuSelect').value);
+            let ram = parseFloat(document.getElementById('ramSelect').value);
+            let total = Math.round(gpu * ram);
+            
+            document.getElementById('fpsOutput').innerText = total + " FPS";
+        }
+
+        // Code Copy Utility
+        function copyCode(text) {
+            navigator.clipboard.writeText(text);
+            alert("Script Command Copied: " + text);
+        }
+    </script>
 </body>
 </html>
