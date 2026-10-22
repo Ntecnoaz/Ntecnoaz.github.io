@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nTecnoAz — Next-Gen Hardware & Gaming Ecosystem</title>
+    <title>nTecnoAz — Ultimate Cyber Ecosystem</title>
     
     <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -12,22 +12,18 @@
     <style>
         :root {
             --bg-dark: #030712;
-            --bg-card: rgba(17, 24, 39, 0.7);
-            --border: rgba(255, 255, 255, 0.08);
+            --bg-card: rgba(17, 24, 39, 0.75);
+            --border: rgba(255, 255, 255, 0.1);
             --primary: #3b82f6;
             --primary-glow: rgba(59, 130, 246, 0.4);
             --accent: #10b981;
             --purple: #8b5cf6;
+            --gold: #f59e0b;
             --text-main: #f9fafb;
             --text-muted: #9ca3af;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body {
             background-color: var(--bg-dark);
@@ -35,329 +31,127 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.12) 0%, transparent 40%);
         }
 
-        /* Glassmorphism Header */
+        /* Header Navigation */
         header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
             backdrop-filter: blur(16px);
-            background: rgba(3, 7, 18, 0.75);
+            background: rgba(3, 7, 18, 0.85);
             border-bottom: 1px solid var(--border);
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px 4%;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
         }
 
         .brand {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 10px;
         }
+        .brand i { color: var(--primary); filter: drop-shadow(0 0 8px var(--primary)); }
+        .brand span { background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .brand i {
-            color: var(--primary);
-            filter: drop-shadow(0 0 8px var(--primary));
+        .nav-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+            color: var(--text-muted); padding: 8px 16px; border-radius: 12px;
+            font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; gap: 6px;
         }
+        .nav-btn.active, .nav-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 0 12px var(--primary-glow); }
 
-        .brand span {
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Language Switcher Dropdown */
         .lang-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            padding: 8px 14px;
-            border-radius: 20px;
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+            padding: 6px 12px; border-radius: 20px;
         }
+        select { background: transparent; border: none; color: #fff; font-weight: 600; font-size: 13px; outline: none; cursor: pointer; }
+        select option { background: #111827; }
 
-        .lang-container i {
-            color: var(--primary);
-        }
+        /* Container Sections */
+        .section-block { display: none; max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .section-block.active { display: block; }
 
-        select {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 14px;
-            outline: none;
-            cursor: pointer;
+        /* SECTION 1: MOVIES & ANIMES */
+        .search-box {
+            position: relative; max-width: 700px; margin: 0 auto 30px;
         }
+        .search-box input {
+            width: 100%; padding: 16px 20px 16px 50px; border-radius: 16px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: #fff; font-size: 16px; outline: none; transition: 0.3s;
+        }
+        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
+        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
 
-        select option {
-            background: #111827;
-            color: #fff;
+        .movie-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;
         }
+        .movie-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .movie-card:hover { transform: translateY(-6px); border-color: var(--primary); }
+        .movie-poster { width: 100%; height: 310px; object-fit: cover; background: #1f293d; }
+        .movie-info { padding: 15px; }
+        .movie-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .movie-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+        .movie-rating { color: var(--gold); font-weight: bold; }
+        .btn-group { display: flex; gap: 6px; }
+        .btn-watch {
+            flex: 1; padding: 8px; border-radius: 8px; border: none; font-size: 11px; font-weight: 700;
+            cursor: pointer; text-align: center; transition: 0.2s;
+        }
+        .btn-trailer { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid var(--primary-glow); }
+        .btn-trailer:hover { background: var(--primary); color: #fff; }
+        .btn-full { background: var(--accent); color: #fff; }
+        .btn-full:hover { opacity: 0.9; }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 70px 20px 40px;
-            max-width: 900px;
-            margin: 0 auto;
+        /* SECTION 2: SOUNDBOARD */
+        .sound-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .sound-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
+            text-align: center; transition: 0.3s; cursor: pointer;
         }
+        .sound-card:hover { border-color: var(--purple); box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+        .sound-icon { font-size: 32px; color: var(--purple); margin-bottom: 10px; }
+        .sound-btn { background: var(--purple); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 12px; margin-top: 10px; cursor: pointer; }
 
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 16px;
-            border-radius: 30px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid var(--primary-glow);
-            color: #60a5fa;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
+        /* SECTION 3: CYBER CAR */
+        .car-dashboard {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;
         }
+        @media(max-width: 800px) { .car-dashboard { grid-template-columns: 1fr; } }
+        .speedometer {
+            width: 200px; height: 200px; border-radius: 50%; border: 8px solid var(--border);
+            border-top-color: var(--accent); margin: 0 auto; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; background: rgba(0,0,0,0.5);
+        }
+        .speed-val { font-size: 48px; font-weight: 800; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 16px;
-            background: linear-gradient(to right, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* SECTION 4: SQUAD BUILDER */
+        .pitch {
+            background: linear-gradient(180deg, #15803d, #166534); border: 3px solid #fff; border-radius: 16px;
+            height: 520px; position: relative; max-width: 750px; margin: 0 auto; padding: 20px;
         }
+        .player-spot {
+            position: absolute; transform: translate(-50%, -50%); text-align: center;
+        }
+        .player-card-box {
+            background: rgba(0,0,0,0.75); border: 1px solid var(--gold); border-radius: 8px;
+            padding: 4px 8px; color: #fff; width: 90px;
+        }
+        .player-pos { font-size: 10px; color: var(--gold); font-weight: bold; }
+        .player-input { width: 100%; background: transparent; border: none; color: #fff; text-align: center; font-size: 11px; font-weight: bold; outline: none; }
 
-        .hero p {
-            color: var(--text-muted);
-            font-size: 18px;
-            line-height: 1.6;
+        /* Modal for Videos */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 2000; display: none; justify-content: center; align-items: center;
         }
-
-        /* Search & Filter Bar */
-        .search-wrapper {
-            max-width: 700px;
-            margin: 30px auto 20px;
-            position: relative;
-        }
-
-        .search-wrapper input {
-            width: 100%;
-            padding: 18px 25px 18px 55px;
-            border-radius: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: #fff;
-            font-size: 16px;
-            outline: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .search-wrapper input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 25px var(--primary-glow);
-        }
-
-        .search-wrapper i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 18px;
-        }
-
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .cat-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 10px 22px;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .cat-btn:hover, .cat-btn.active {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        /* Main Container */
-        .main-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 60px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--purple));
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-tag {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
-            background: rgba(16, 185, 129, 0.1);
-            padding: 4px 10px;
-            border-radius: 6px;
-            width: fit-content;
-            margin-bottom: 15px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .card-footer {
-            border-top: 1px solid var(--border);
-            padding-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        /* Interactive FPS Calculator Widget Section */
-        .calculator-section {
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
-
-        .calc-box {
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(31, 41, 55, 0.8));
-            border: 1px solid var(--primary-glow);
-            border-radius: 24px;
-            padding: 35px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: center;
-        }
-
-        @media (max-width: 850px) {
-            .calc-box { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 36px; }
-        }
-
-        .calc-inputs select {
-            width: 100%;
-            padding: 14px;
-            background: #0b0f19;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-        .fps-display {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 30px;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-        }
-
-        .fps-number {
-            font-size: 64px;
-            font-weight: 800;
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Code Copy Box */
-        .code-box {
-            background: #0b0f19;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: #38bdf8;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .copy-btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 11px;
-            transition: 0.2s;
-        }
-
-        .copy-btn:hover {
-            background: var(--purple);
-        }
+        .modal-content { width: 90%; max-width: 850px; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; position: relative; }
+        .close-modal { position: absolute; top: 10px; right: 15px; color: #fff; font-size: 24px; cursor: pointer; z-index: 10; }
     </style>
 </head>
 <body>
@@ -365,15 +159,20 @@
     <!-- Header Navigation -->
     <header>
         <div class="brand">
-            <i class="fa-solid fa-bolt"></i>
-            nTecno<span>Az</span>
+            <i class="fa-solid fa-bolt"></i> nTecno<span>Az</span>
         </div>
 
-        <!-- Language Switcher -->
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('tabMovies', this)"><i class="fa-solid fa-film"></i> <span id="mTabMovies">Movies & Anime</span></button>
+            <button class="nav-btn" onclick="switchTab('tabSound', this)"><i class="fa-solid fa-music"></i> <span id="mTabSound">Soundboard</span></button>
+            <button class="nav-btn" onclick="switchTab('tabCar', this)"><i class="fa-solid fa-gauge-high"></i> <span id="mTabCar">Cyber Car</span></button>
+            <button class="nav-btn" onclick="switchTab('tabSquad', this)"><i class="fa-solid fa-futbol"></i> <span id="mTabSquad">Squad Builder</span></button>
+        </div>
+
         <div class="lang-container">
             <i class="fa-solid fa-globe"></i>
-            <select id="langSelect" onchange="changeLanguage(this.value)">
-                <option value="en" selected>English (US)</option>
+            <select id="langSelect" onchange="changeLang(this.value)">
+                <option value="en" selected>English</option>
                 <option value="az">Azərbaycan</option>
                 <option value="tr">Türkçe</option>
                 <option value="ru">Русский</option>
@@ -381,276 +180,221 @@
         </div>
     </header>
 
-    <!-- Hero Title -->
-    <section class="hero">
-        <div class="badge">
-            <i class="fa-solid fa-microchip"></i>
-            <span id="badgeText">Powered by nTecnoAz Engine v4.0</span>
-        </div>
-        <h1 id="heroTitle">Next-Gen Hardware & Gaming Ecosystem</h1>
-        <p id="heroDesc">Explore hyper-optimized system tweaks, real-time FPS benchmarks, and powerful tech utilities with zero friction.</p>
-
-        <!-- Search Bar -->
-        <div class="search-wrapper">
+    <!-- SECTION 1: MOVIE & ANIME HUB -->
+    <div class="section-block active" id="tabMovies">
+        <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Search games, tweaks, or hardware specs..." onkeyup="filterCards()">
+            <input type="text" id="movieSearch" placeholder="Search Harry Potter, Anime, or Movies..." onkeyup="searchMovies()">
         </div>
-    </section>
-
-    <!-- Categories -->
-    <div class="categories">
-        <button class="cat-btn active" onclick="filterCat('all', this)" id="btnAll">All Systems</button>
-        <button class="cat-btn" onclick="filterCat('game', this)" id="btnGame">Game Benchmarks</button>
-        <button class="cat-btn" onclick="filterCat('opt', this)" id="btnOpt">FPS Boost & Tweaks</button>
-        <button class="cat-btn" onclick="filterCat('tool', this)" id="btnTool">Software & Tools</button>
+        <div class="movie-grid" id="movieGrid">
+            <!-- Dynamic Movies loaded via TMDb API -->
+        </div>
     </div>
 
-    <!-- Interactive FPS Calculator Section -->
-    <div class="calculator-section">
-        <div class="calc-box">
-            <div class="calc-inputs">
-                <h2 style="margin-bottom: 8px;" id="calcTitle">⚡ Real-Time FPS Estimator</h2>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;" id="calcDesc">Select your specs to calculate estimated performance:</p>
-                
-                <select id="gpuSelect" onchange="calculateFPS()">
-                    <option value="30">NVIDIA GTX 1050 Ti / GTX 960 (Budget)</option>
-                    <option value="60" selected>NVIDIA GTX 1660 Super / RTX 2060 (Mid-Range)</option>
-                    <option value="110">NVIDIA RTX 3070 / RTX 4070 (High-End)</option>
-                </select>
-
-                <select id="ramSelect" onchange="calculateFPS()">
-                    <option value="0.8">8 GB RAM (Basic)</option>
-                    <option value="1.0" selected>16 GB RAM (Recommended)</option>
-                    <option value="1.25">32 GB RAM (Ultra Fast)</option>
-                </select>
+    <!-- SECTION 2: SOUNDBOARD & MEME EFFECTS -->
+    <div class="section-block" id="tabSound">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="soundSearch" placeholder="Search sounds..." onkeyup="filterSounds()">
+        </div>
+        <div class="sound-grid" id="soundGrid">
+            <div class="sound-card" onclick="playSound(880)">
+                <div class="sound-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h4 class="s-name">Cyber Pulse</h4>
+                <button class="sound-btn"><i class="fa-solid fa-play"></i> Play</button>
             </div>
-
-            <div class="fps-display">
-                <div style="font-size: 13px; color: var(--text-muted); font-weight: 700;" id="estLabel">ESTIMATED AVERAGE FPS</div>
-                <div class="fps-number" id="fpsOutput">90 FPS</div>
-                <div style="font-size: 12px; color: var(--accent); margin-top: 5px;" id="statusLabel">Smooth Performance Guarantee</div>
+            <div class="sound-card" onclick="playSound(440)">
+                <div class="sound-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <h4 class="s-name">Bass Drop</h4>
+                <button class="sound-btn"><i class="fa-solid fa-play"></i> Play</button>
+            </div>
+            <div class="sound-card" onclick="playSound(1200)">
+                <div class="sound-icon"><i class="fa-solid fa-gamepad"></i></div>
+                <h4 class="s-name">8-Bit Laser</h4>
+                <button class="sound-btn"><i class="fa-solid fa-play"></i> Play</button>
+            </div>
+            <div class="sound-card" onclick="playSound(300)">
+                <div class="sound-icon"><i class="fa-solid fa-ghost"></i></div>
+                <h4 class="s-name">Meme Horn</h4>
+                <button class="sound-btn"><i class="fa-solid fa-play"></i> Play</button>
             </div>
         </div>
     </div>
 
-    <!-- Main Content Cards -->
-    <main class="main-grid" id="cardContainer">
-
-        <!-- Card 1 -->
-        <div class="card" data-cat="game">
+    <!-- SECTION 3: CYBER CAR DASHBOARD -->
+    <div class="section-block" id="tabCar">
+        <div class="car-dashboard">
             <div>
-                <div class="card-tag" id="tag1">BENCHMARK</div>
-                <h3 id="c1Title">Red Dead Redemption 2</h3>
-                <p id="c1Desc">Ultra-detailed open-world optimization guide. Get stable 60+ FPS on mid-range hardware with optimized settings.</p>
-            </div>
-            <div class="card-footer">
-                <span style="color: var(--primary);" id="c1Stat">Rec: 16 GB RAM</span>
-                <span style="color: var(--accent);">DirectX 12</span>
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card" data-cat="opt">
-            <div>
-                <div class="card-tag" style="color: var(--purple); background: rgba(139,92,246,0.1);" id="tag2">TWEAK</div>
-                <h3 id="c2Title">Windows RAM Cache Cleaner</h3>
-                <p id="c2Desc">Instantly flush standby RAM memory and lower background process CPU usage with one click script.</p>
-                
-                <div class="code-box">
-                    <span>%temp% & prefetch clean</span>
-                    <button class="copy-btn" onclick="copyCode('echo Cleaned! && pause')">Copy</button>
+                <h2 style="margin-bottom: 15px;" id="carHead">⚡ 0-100 km/h Speed Estimator</h2>
+                <div style="margin-bottom: 15px;">
+                    <label>Horsepower (HP):</label>
+                    <input type="number" id="hpInput" value="450" style="width: 100%; padding: 10px; background: #1f293d; border: 1px solid var(--border); color: #fff; border-radius: 8px; margin-top: 5px;">
                 </div>
+                <div style="margin-bottom: 15px;">
+                    <label>Weight (KG):</label>
+                    <input type="number" id="weightInput" value="1500" style="width: 100%; padding: 10px; background: #1f293d; border: 1px solid var(--border); color: #fff; border-radius: 8px; margin-top: 5px;">
+                </div>
+                <button onclick="calcSpeed()" style="background: var(--accent); color: #fff; padding: 12px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">Calculate Speed</button>
             </div>
-            <div class="card-footer" style="margin-top: 15px;">
-                <span style="color: var(--purple);" id="c2Stat">Gain: +15% FPS</span>
-                <span>Safe Script</span>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card" data-cat="tool">
-            <div>
-                <div class="card-tag" style="color: #38bdf8; background: rgba(56,189,248,0.1);" id="tag3">UTILITY</div>
-                <h3 id="c3Title">Lively Wallpaper Studio</h3>
-                <p id="c3Desc">Transform your desktop with GPU-accelerated live wallpapers without eating up system performance.</p>
-            </div>
-            <div class="card-footer">
-                <span style="color: #38bdf8;" id="c3Stat">Open Source</span>
-                <span>Low VRAM</span>
+            <div class="speedometer">
+                <div class="speed-val" id="accVal">3.6s</div>
+                <div style="font-size: 12px; color: var(--text-muted);">0-100 KM/H</div>
             </div>
         </div>
+    </div>
 
-        <!-- Card 4 -->
-        <div class="card" data-cat="game">
-            <div>
-                <div class="card-tag" id="tag4">EMULATION</div>
-                <h3 id="c4Title">PUBG Mobile Gameloop Engine</h3>
-                <p id="c4Desc">Unlock 90 FPS ultra-smooth mode by enabling Hardware Virtualization (VT) in motherboard BIOS.</p>
-            </div>
-            <div class="card-footer">
-                <span style="color: var(--primary);" id="c4Stat">VT Enabled</span>
-                <span style="color: var(--accent);">90 FPS</span>
-            </div>
+    <!-- SECTION 4: SQUAD BUILDER -->
+    <div class="section-block" id="tabSquad">
+        <h2 style="text-align: center; margin-bottom: 20px;" id="squadHead">🏆 Dream 11 Football Tactics</h2>
+        <div class="pitch">
+            <!-- GK -->
+            <div class="player-spot" style="bottom: 5%; left: 50%;"><div class="player-card-box"><div class="player-pos">GK</div><input class="player-input" value="Courtois"></div></div>
+            <!-- DEF -->
+            <div class="player-spot" style="bottom: 25%; left: 20%;"><div class="player-card-box"><div class="player-pos">LB</div><input class="player-input" value="Davies"></div></div>
+            <div class="player-spot" style="bottom: 22%; left: 40%;"><div class="player-card-box"><div class="player-pos">CB</div><input class="player-input" value="Van Dijk"></div></div>
+            <div class="player-spot" style="bottom: 22%; left: 60%;"><div class="player-card-box"><div class="player-pos">CB</div><input class="player-input" value="Rüdiger"></div></div>
+            <div class="player-spot" style="bottom: 25%; left: 80%;"><div class="player-card-box"><div class="player-pos">RB</div><input class="player-input" value="Walker"></div></div>
+            <!-- MID -->
+            <div class="player-spot" style="top: 48%; left: 30%;"><div class="player-card-box"><div class="player-pos">CM</div><input class="player-input" value="De Bruyne"></div></div>
+            <div class="player-spot" style="top: 52%; left: 50%;"><div class="player-card-box"><div class="player-pos">CDM</div><input class="player-input" value="Rodri"></div></div>
+            <div class="player-spot" style="top: 48%; left: 70%;"><div class="player-card-box"><div class="player-pos">CM</div><input class="player-input" value="Bellingham"></div></div>
+            <!-- ATTACK -->
+            <div class="player-spot" style="top: 18%; left: 22%;"><div class="player-card-box"><div class="player-pos">LW</div><input class="player-input" value="Vinicius"></div></div>
+            <div class="player-spot" style="top: 12%; left: 50%;"><div class="player-card-box"><div class="player-pos">ST</div><input class="player-input" value="Mbappé"></div></div>
+            <div class="player-spot" style="top: 18%; left: 78%;"><div class="player-card-box"><div class="player-pos">RW</div><input class="player-input" value="Salah"></div></div>
         </div>
+    </div>
 
-        <!-- Card 5 -->
-        <div class="card" data-cat="tool">
-            <div>
-                <div class="card-tag" style="color: #38bdf8; background: rgba(56,189,248,0.1);" id="tag5">CROSSPLAY</div>
-                <h3 id="c5Title">GeyserMC & Floodgate Hub</h3>
-                <p id="c5Desc">Connect Minecraft Bedrock (Mobile/Tablet) and Java (PC) players seamlessly on single server node.</p>
-            </div>
-            <div class="card-footer">
-                <span style="color: #38bdf8;" id="c5Stat">Aternos Ready</span>
-                <span>Cross-Platform</span>
-            </div>
+    <!-- Video Player Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <iframe id="videoIframe" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
         </div>
-
-        <!-- Card 6 -->
-        <div class="card" data-cat="opt">
-            <div>
-                <div class="card-tag" style="color: var(--purple); background: rgba(139,92,246,0.1);" id="tag6">OPTIMIZATION</div>
-                <h3 id="c6Title">Resident Evil Revelations 2</h3>
-                <p id="c6Desc">Maximum performance config for budget PCs. Smooth 60 FPS output on low-spec systems.</p>
-            </div>
-            <div class="card-footer">
-                <span style="color: var(--purple);" id="c6Stat">Low GPU Load</span>
-                <span>1080p Ready</span>
-            </div>
-        </div>
-
-    </main>
+    </div>
 
     <script>
-        // Dictionary for 4 Languages
-        const i18n = {
-            en: {
-                badge: "Powered by nTecnoAz Engine v4.0",
-                heroTitle: "Next-Gen Hardware & Gaming Ecosystem",
-                heroDesc: "Explore hyper-optimized system tweaks, real-time FPS benchmarks, and powerful tech utilities with zero friction.",
-                searchPh: "Search games, tweaks, or hardware specs...",
-                btnAll: "All Systems", btnGame: "Game Benchmarks", btnOpt: "FPS Boost & Tweaks", btnTool: "Software & Tools",
-                calcTitle: "⚡ Real-Time FPS Estimator", calcDesc: "Select your specs to calculate estimated performance:",
-                estLabel: "ESTIMATED AVERAGE FPS", statusLabel: "Smooth Performance Guarantee",
-                c1Title: "Red Dead Redemption 2", c1Desc: "Ultra-detailed open-world optimization guide. Get stable 60+ FPS on mid-range hardware with optimized settings.",
-                c2Title: "Windows RAM Cache Cleaner", c2Desc: "Instantly flush standby RAM memory and lower background process CPU usage with one click script.",
-                c3Title: "Lively Wallpaper Studio", c3Desc: "Transform your desktop with GPU-accelerated live wallpapers without eating up system performance.",
-                c4Title: "PUBG Mobile Gameloop Engine", c4Desc: "Unlock 90 FPS ultra-smooth mode by enabling Hardware Virtualization (VT) in motherboard BIOS.",
-                c5Title: "GeyserMC & Floodgate Hub", c5Desc: "Connect Minecraft Bedrock (Mobile/Tablet) and Java (PC) players seamlessly on single server node.",
-                c6Title: "Resident Evil Revelations 2", c6Desc: "Maximum performance config for budget PCs. Smooth 60 FPS output on low-spec systems."
-            },
-            az: {
-                badge: "nTecnoAz Engine v4.0 tərəfindən dəstəklənir",
-                heroTitle: "Yeni Nəsil Avadanlıq və Oyun Ekosistemi",
-                heroDesc: "Optimizasiya edilmiş sistem ayarlarını, canlı FPS testlərini və güclü texnoloji alətləri kəşf edin.",
-                searchPh: "Oyun, ayar və ya kompyuter göstəricisi axtar...",
-                btnAll: "Bütün Sistemlər", btnGame: "Oyun Testləri", btnOpt: "FPS Artırma & Format", btnTool: "Proqramlar & Alətlər",
-                calcTitle: "⚡ Canlı FPS Hesablayıcı", calcDesc: "Kompyuter göstəricilərini seçərək orta FPS dəyərini görün:",
-                estLabel: "TƏHMİNİ ORTA FPS", statusLabel: "Səlis Performans Zəmanəti",
-                c1Title: "Red Dead Redemption 2", c1Desc: "Açıq dünya üçün ətraflı optimizasiya təlimatı. Orta güclü kompyuterdə sabit 60+ FPS əldə edin.",
-                c2Title: "Windows RAM Keş Təmizləyici", c2Desc: "Tək kliklə arxa fondakı lüzumsuz RAM yaddaşını və CPU yükünü dərhal azaldın.",
-                c3Title: "Lively Wallpaper Studiyası", c3Desc: "Kompyuteri yormadan masaüstünə canlı geyminq videolardan ibarət divar kağızları qoyun.",
-                c4Title: "PUBG Mobile Gameloop Motoru", c4Desc: "Ana platada BIOS-dan Virtualization (VT) açaraq ultra hamar 90 FPS rejimini aktivləşdirin.",
-                c5Title: "GeyserMC & Floodgate Mərkəzi", c5Desc: "Minecraft Bedrock (Telefon) və Java (PC) oyunçularını bir serverə qoşun.",
-                c6Title: "Resident Evil Revelations 2", c6Desc: "Zəif kompyuterlər üçün maksimum performans konfiqurasiyası. 60 FPS təminatı."
-            },
-            tr: {
-                badge: "nTecnoAz Engine v4.0 ile Güçlendirildi",
-                heroTitle: "Yeni Nesil Donanım ve Oyun Ekosistemi",
-                heroDesc: "Süper optimize sistem ayarlarını, canlı FPS testlerini ve güçlü teknoloji araçlarını keşfedin.",
-                searchPh: "Oyun, ayar veya donanım ara...",
-                btnAll: "Tüm Sistemler", btnGame: "Oyun Testleri", btnOpt: "FPS Artırma & Ayarlar", btnTool: "Yazılım & Araçlar",
-                calcTitle: "⚡ Canlı FPS Hesaplayıcı", calcDesc: "Sistem bileşenlerinizi seçerek ortalama FPS'inizi hesaplayın:",
-                estLabel: "TAHMİNİ ORTALAMA FPS", statusLabel: "Akıcı Performans Garantisi",
-                c1Title: "Red Dead Redemption 2", c1Desc: "Açık dünya optimizasyon rehberi. Orta seviye donanımda kararlı 60+ FPS elde edin.",
-                c2Title: "Windows RAM Bellek Temizleyici", c2Desc: "Tek tıkla arka plandaki gereksiz RAM ve CPU kullanımını anında temizleyin.",
-                c3Title: "Lively Wallpaper Stüdyosu", c3Desc: "Sistemi yormadan masaüstünüze canlı hareketli duvar kağıtları ekleyin.",
-                c4Title: "PUBG Mobile Gameloop Motoru", c4Desc: "BIOS'tan Sanallaştırmayı (VT) açarak ultra akıcı 90 FPS modunu aktif edin.",
-                c5Title: "GeyserMC & Floodgate Merkezi", c5Desc: "Minecraft Bedrock (Mobil) ve Java (PC) oyuncularını tek bir sunucuda birleştirin.",
-                c6Title: "Resident Evil Revelations 2", c6Desc: "Düşük bütçeli sistemler için maksimum performans ayarları. Akıcı 60 FPS."
-            },
-            ru: {
-                badge: "Работает на базе nTecnoAz Engine v4.0",
-                heroTitle: "Игровая и Аппаратная Экосистема Нового Поколения",
-                heroDesc: "Исследуйте оптимизированные настройки системы, тесты FPS и мощные утилиты без задержек.",
-                searchPh: "Поиск игр, настроек или железа...",
-                btnAll: "Все Системы", btnGame: "Тесты Игр", btnOpt: "FPS Оптимизация", btnTool: "Софт и Утилиты",
-                calcTitle: "⚡ Калькулятор FPS", calcDesc: "Выберите ваши комплектующие для расчета FPS:",
-                estLabel: "РАСЧЕТНЫЙ СРЕДНИЙ FPS", statusLabel: "Гарантия Плавности",
-                c1Title: "Red Dead Redemption 2", c1Desc: "Подробный гайд по оптимизации. Получите стабильные 60+ FPS на средних ПК.",
-                c2Title: "Очистка Кэша RAM Windows", c2Desc: "Мгновенный сброс оперативной памяти и снижение нагрузки на ЦП в один клик.",
-                c3Title: "Lively Wallpaper Студия", c3Desc: "Живые обои на рабочий стол без потери производительности системы.",
-                c4Title: "PUBG Mobile Gameloop Движок", c4Desc: "Включите виртуализацию (VT) в BIOS для активации режима 90 FPS.",
-                c5Title: "GeyserMC & Floodgate Центр", c5Desc: "Объедините игроков Minecraft Bedrock (Телефоны) и Java (ПК) на одном сервере.",
-                c6Title: "Resident Evil Revelations 2", c6Desc: "Максимальная производительность для слабых ПК. Плавные 60 FPS."
+        const TMDB_API_KEY = "3fd2be6f0c70a2a598f084dd23028236"; // TMDb API Key for movies
+
+        // Navigation Tabs
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.section-block').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Fetch Movies from TMDb API
+        async function fetchMovies(query = 'Harry Potter') {
+            const grid = document.getElementById('movieGrid');
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading movies...</p>';
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                grid.innerHTML = '';
+
+                if (!data.results || data.results.length === 0) {
+                    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No movies found.</p>';
+                    return;
+                }
+
+                data.results.forEach(m => {
+                    const poster = m.poster_path ? `https://image.tmdb.org/t/p/w500${m.poster_path}` : 'https://via.placeholder.com/500x750?text=No+Poster';
+                    grid.innerHTML += `
+                        <div class="movie-card">
+                            <img class="movie-poster" src="${poster}" alt="${m.title}">
+                            <div class="movie-info">
+                                <div class="movie-title">${m.title}</div>
+                                <div class="movie-meta">
+                                    <span>${m.release_date ? m.release_date.split('-')[0] : 'N/A'}</span>
+                                    <span class="movie-rating">★ ${m.vote_average ? m.vote_average.toFixed(1) : 'N/A'}</span>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn-watch btn-trailer" onclick="playTrailer(${m.id})">Trailer</button>
+                                    <button class="btn-watch btn-full" onclick="playFullMovie('${m.title}')">Watch Full</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (e) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Error loading database.</p>';
             }
+        }
+
+        let searchTimeout;
+        function searchMovies() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                let q = document.getElementById('movieSearch').value;
+                fetchMovies(q || 'Harry Potter');
+            }, 500);
+        }
+
+        // Play YouTube Trailer
+        async function playTrailer(movieId) {
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${TMDB_API_KEY}`);
+                const data = await res.json();
+                const trailer = data.results.find(v => v.type === 'Trailer' && v.site === 'YouTube') || data.results[0];
+                if (trailer) {
+                    document.getElementById('videoIframe').src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1`;
+                    document.getElementById('videoModal').style.display = 'flex';
+                } else {
+                    alert('Trailer not available for this movie.');
+                }
+            } catch (e) { alert('Unable to load video.'); }
+        }
+
+        // Play Full Movie Stream
+        function playFullMovie(title) {
+            document.getElementById('videoIframe').src = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(title + ' full movie')}&autoplay=1`;
+            document.getElementById('videoModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('videoIframe').src = '';
+        }
+
+        // Web Audio Synthesizer Sound Player
+        function playSound(freq) {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.value = freq;
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.5);
+            setTimeout(() => osc.stop(), 500);
+        }
+
+        // Speed Calculator
+        function calcSpeed() {
+            let hp = parseFloat(document.getElementById('hpInput').value) || 1;
+            let weight = parseFloat(document.getElementById('weightInput').value) || 1;
+            let sec = ((weight / hp) * 1.1).toFixed(1);
+            document.getElementById('accVal').innerText = sec + 's';
+        }
+
+        // Multi-Language Support
+        const langData = {
+            en: { mTabMovies: "Movies & Anime", mTabSound: "Soundboard", mTabCar: "Cyber Car", mTabSquad: "Squad Builder", carHead: "⚡ 0-100 km/h Speed Estimator", squadHead: "🏆 Dream 11 Football Tactics" },
+            az: { mTabMovies: "Kino və Anime", mTabSound: "Səs Bazası", mTabCar: "Kiber Maşın", mTabSquad: "Taktik Heyət", carHead: "⚡ 0-100 km/s Sürət Hesablayıcı", squadHead: "🏆 Xəyali 11 Futbol Taktikası" },
+            tr: { mTabMovies: "Film ve Anime", mTabSound: "Ses Paneli", mTabCar: "Siber Araba", mTabSquad: "Kadro Kurucu", carHead: "⚡ 0-100 km/s Hız Hesaplayıcı", squadHead: "🏆 Rüya 11 Futbol Taktikleri" },
+            ru: { mTabMovies: "Фильмы и Аниме", mTabSound: "Звуковая Панель", mTabCar: "Кибер Авто", mTabSquad: "Состав Команды", carHead: "⚡ 0-100 км/ч Калькулятор Скорости", squadHead: "🏆 Мечта 11 Футбольная Тактика" }
         };
 
-        // Language Switcher Function
-        function changeLanguage(lang) {
-            const data = i18n[lang];
-            document.getElementById('badgeText').innerText = data.badge;
-            document.getElementById('heroTitle').innerText = data.heroTitle;
-            document.getElementById('heroDesc').innerText = data.heroDesc;
-            document.getElementById('searchInput').placeholder = data.searchPh;
-            
-            document.getElementById('btnAll').innerText = data.btnAll;
-            document.getElementById('btnGame').innerText = data.btnGame;
-            document.getElementById('btnOpt').innerText = data.btnOpt;
-            document.getElementById('btnTool').innerText = data.btnTool;
-
-            document.getElementById('calcTitle').innerText = data.calcTitle;
-            document.getElementById('calcDesc').innerText = data.calcDesc;
-            document.getElementById('estLabel').innerText = data.estLabel;
-            document.getElementById('statusLabel').innerText = data.statusLabel;
-
-            document.getElementById('c1Title').innerText = data.c1Title; document.getElementById('c1Desc').innerText = data.c1Desc;
-            document.getElementById('c2Title').innerText = data.c2Title; document.getElementById('c2Desc').innerText = data.c2Desc;
-            document.getElementById('c3Title').innerText = data.c3Title; document.getElementById('c3Desc').innerText = data.c3Desc;
-            document.getElementById('c4Title').innerText = data.c4Title; document.getElementById('c4Desc').innerText = data.c4Desc;
-            document.getElementById('c5Title').innerText = data.c5Title; document.getElementById('c5Desc').innerText = data.c5Desc;
-            document.getElementById('c6Title').innerText = data.c6Title; document.getElementById('c6Desc').innerText = data.c6Desc;
+        function changeLang(lang) {
+            const d = langData[lang];
+            for (let key in d) {
+                if (document.getElementById(key)) document.getElementById(key).innerText = d[key];
+            }
         }
 
-        // Live Search Filter
-        function filterCards() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.card');
-
-            cards.forEach(card => {
-                let text = card.innerText.toLowerCase();
-                card.style.display = text.includes(input) ? "flex" : "none";
-            });
-        }
-
-        // Category Filter
-        let currentCat = 'all';
-        function filterCat(category, btn) {
-            currentCat = category;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            let cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                let cat = card.getAttribute('data-cat');
-                card.style.display = (category === 'all' || cat === category) ? "flex" : "none";
-            });
-        }
-
-        // FPS Calculator Algorithm
-        function calculateFPS() {
-            let gpu = parseFloat(document.getElementById('gpuSelect').value);
-            let ram = parseFloat(document.getElementById('ramSelect').value);
-            let total = Math.round(gpu * ram);
-            
-            document.getElementById('fpsOutput').innerText = total + " FPS";
-        }
-
-        // Code Copy Utility
-        function copyCode(text) {
-            navigator.clipboard.writeText(text);
-            alert("Script Command Copied: " + text);
-        }
+        // Initial Load
+        window.onload = () => { fetchMovies('Harry Potter'); };
     </script>
 </body>
 </html>
