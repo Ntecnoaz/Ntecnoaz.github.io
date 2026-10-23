@@ -3,680 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NTECNOAZ | Texnologiya Dünyası</title>
-
-<meta name="description" content="NTECNOAZ — telefonlar, kompüterlər, oyun avadanlıqları və texnologiya dünyası.">
-
+<title>TecnoGPT | Nicat Rəhimli</title>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: #070b14;
-    color: white;
-}
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(7, 11, 20, 0.95);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid #202b42;
-}
-
-nav {
-    max-width: 1200px;
-    margin: auto;
-    padding: 18px 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo {
-    font-size: 27px;
-    font-weight: 900;
-    color: #39a8ff;
-}
-
-.logo span {
-    color: white;
-}
-
-nav a {
-    text-decoration: none;
-    color: #ddd;
-    margin-left: 20px;
-    transition: .3s;
-}
-
-nav a:hover {
-    color: #39a8ff;
-}
-
-.hero {
-    min-height: 580px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 20px;
-    background:
-        radial-gradient(ellipse at 50% 20%, #124d88 0%, transparent 55%),
-        linear-gradient(135deg, #080d19, #101b30);
-}
-
-.hero-content {
-    max-width: 850px;
-}
-
-.badge {
-    display: inline-block;
-    padding: 10px 17px;
-    border: 1px solid #268cff;
-    border-radius: 30px;
-    color: #65baff;
-    margin-bottom: 25px;
-    background: #102744;
-}
-
-.hero h1 {
-    font-size: clamp(38px, 7vw, 76px);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 25px;
-}
-
-.hero h1 span {
-    color: #39a8ff;
-}
-
-.hero p {
-    color: #b7c5d9;
-    font-size: 18px;
-    line-height: 1.8;
-    margin-bottom: 32px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 15px 25px;
-    border-radius: 10px;
-    background: #168bff;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.btn:hover {
-    background: #0068d9;
-    transform: translateY(-3px);
-}
-
-.btn-outline {
-    background: transparent;
-    border: 1px solid #168bff;
-    margin-left: 10px;
-}
-
-section {
-    max-width: 1200px;
-    margin: auto;
-    padding: 75px 22px;
-}
-
-.section-title {
-    font-size: 35px;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.section-subtitle {
-    text-align: center;
-    color: #9caec5;
-    margin-bottom: 40px;
-    line-height: 1.7;
-}
-
-.search-box {
-    max-width: 550px;
-    margin: 0 auto 35px;
-}
-
-.search-box input {
-    width: 100%;
-    padding: 16px;
-    background: #111b2c;
-    border: 1px solid #263b59;
-    border-radius: 12px;
-    color: white;
-    font-size: 16px;
-    outline: none;
-}
-
-.search-box input:focus {
-    border-color: #168bff;
-}
-
-.categories {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 35px;
-}
-
-.category-btn {
-    padding: 11px 18px;
-    background: #111b2c;
-    border: 1px solid #263b59;
-    color: white;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-.category-btn.active,
-.category-btn:hover {
-    background: #168bff;
-    border-color: #168bff;
-}
-
-.products {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-}
-
-.product {
-    background: linear-gradient(145deg, #111c30, #0b111f);
-    border: 1px solid #202f47;
-    border-radius: 18px;
-    padding: 25px;
-    text-align: center;
-    transition: .3s;
-}
-
-.product:hover {
-    transform: translateY(-7px);
-    border-color: #168bff;
-    box-shadow: 0 15px 40px #007bff18;
-}
-
-.product-icon {
-    height: 145px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    background: #14233a;
-    border-radius: 13px;
-    margin-bottom: 22px;
-}
-
-.product h3 {
-    font-size: 21px;
-    margin-bottom: 12px;
-}
-
-.product p {
-    color: #9caec5;
-    line-height: 1.6;
-    min-height: 45px;
-    margin-bottom: 15px;
-}
-
-.price {
-    font-size: 23px;
-    color: #43b0ff;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.product .btn {
-    width: 100%;
-}
-
-.no-results {
-    display: none;
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 30px;
-    color: #b7c5d9;
-}
-
-.promo {
-    max-width: 1156px;
-    margin: 20px auto;
-    padding: 55px 25px;
-    border-radius: 22px;
-    text-align: center;
-    background:
-        radial-gradient(circle at top right, #155e9d, transparent 45%),
-        linear-gradient(120deg, #10213b, #101629);
-    border: 1px solid #24466d;
-}
-
-.promo h2 {
-    font-size: 35px;
-    margin-bottom: 20px;
-}
-
-.promo p {
-    color: #bdcde1;
-    line-height: 1.8;
-    margin-bottom: 25px;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.feature {
-    padding: 30px 20px;
-    text-align: center;
-    background: #101a2b;
-    border: 1px solid #20314b;
-    border-radius: 16px;
-}
-
-.feature .icon {
-    font-size: 40px;
-    margin-bottom: 17px;
-}
-
-.feature h3 {
-    margin-bottom: 12px;
-}
-
-.feature p {
-    color: #9caec5;
-    line-height: 1.7;
-}
-
-.contact {
-    text-align: center;
-}
-
-.contact-box {
-    background: #101a2b;
-    border: 1px solid #20314b;
-    padding: 35px;
-    border-radius: 20px;
-}
-
-.contact-box p {
-    color: #b7c5d9;
-    line-height: 1.8;
-    margin: 15px 0 25px;
-}
-
-footer {
-    border-top: 1px solid #202b42;
-    padding: 35px 20px;
-    text-align: center;
-    color: #8495ad;
-    line-height: 2;
-}
-
-footer strong {
-    color: #39a8ff;
-}
-
-.cart-button {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1001;
-    padding: 15px 20px;
-    background: #168bff;
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 5px 25px #168bff55;
-}
-
-.cart-panel {
-    display: none;
-    position: fixed;
-    z-index: 1002;
-    right: 20px;
-    bottom: 85px;
-    width: min(350px, calc(100% - 40px));
-    padding: 23px;
-    border: 1px solid #294363;
-    border-radius: 17px;
-    background: #101a2b;
-    box-shadow: 0 15px 50px #0009;
-}
-
-.cart-panel h3 {
-    margin-bottom: 18px;
-}
-
-.cart-items {
-    max-height: 250px;
-    overflow-y: auto;
-    line-height: 2;
-    color: #c7d6e9;
-}
-
-.cart-total {
-    margin: 18px 0;
-    font-size: 19px;
-    color: #43b0ff;
-}
-
-.cart-panel .btn {
-    width: 100%;
-    margin: 5px 0;
-}
-
-.close-cart {
-    float: right;
-    cursor: pointer;
-    font-size: 23px;
-}
-
-@media (max-width: 800px) {
-    nav {
-        flex-wrap: wrap;
-    }
-
-    nav a {
-        margin-left: 10px;
-        font-size: 14px;
-    }
-
-    .products {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .features {
-        grid-template-columns: 1fr;
-    }
-
-    .hero {
-        min-height: 500px;
-    }
-}
-
-@media (max-width: 520px) {
-    .products {
-        grid-template-columns: 1fr;
-    }
-
-    .logo {
-        font-size: 23px;
-    }
-
-    nav {
-        justify-content: center;
-    }
-
-    nav div:last-child {
-        text-align: center;
-    }
-
-    .hero p {
-        font-size: 16px;
-    }
-
-    .section-title {
-        font-size: 29px;
-    }
-
-    .promo h2 {
-        font-size: 28px;
-    }
-}
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#f4f6ff;font-family:Arial,sans-serif;height:100dvh}
+.app{max-width:900px;margin:auto;height:100dvh;display:flex;flex-direction:column;padding:14px}
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 16px;border-bottom:1px solid #29344d}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:45px;height:45px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#8c72ff,#45d8c5);color:#081020;font-weight:bold;font-size:19px}
+h1{font-size:21px;margin:0}
+.sub{font-size:12px;color:#9aa9c5;margin-top:4px}
+button{cursor:pointer;font-size:14px}
+#newChat{padding:10px;border-radius:10px;background:#202b43;color:white;border:1px solid #34415c}
+.settings{padding:12px;background:#121a2d;border:1px solid #29344d;border-radius:14px;margin-top:12px}
+.settings summary{cursor:pointer;font-size:14px;color:#c7d1ed}
+.settings input{width:100%;margin-top:12px;background:#0b1020;border:1px solid #34415c;color:white;padding:12px;border-radius:9px;font-size:14px}
+.settings small{display:block;color:#9aa9c5;line-height:1.5;margin-top:8px}
+#chat{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:15px;padding:20px 0}
+.welcome{text-align:center;margin:auto 0;padding:20px 4px}
+.star{font-size:42px;color:#8c82ff}
+.welcome h2{font-size:25px;margin:8px 0}
+.welcome p{color:#9aa9c5;line-height:1.5}
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips button{background:#17223a;border:1px solid #29344d;color:#e4eaff;padding:10px 12px;border-radius:20px}
+.message{max-width:88%;padding:13px 15px;border-radius:15px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.user{align-self:flex-end;background:#293963;border-bottom-right-radius:4px}
+.bot{align-self:flex-start;background:#141e33;border:1px solid #29344d;border-bottom-left-radius:4px}
+.error{color:#ffb5b5}
+form{display:flex;gap:9px;padding:9px;background:#121a2d;border:1px solid #34415c;border-radius:16px}
+textarea{flex:1;min-width:0;resize:none;max-height:130px;background:transparent;border:0;outline:0;color:white;font:16px Arial;padding:12px 5px}
+#send{background:#7d78ff;color:white;border:0;border-radius:12px;padding:0 15px;font-weight:bold}
+#send:disabled{opacity:.5}
+footer{text-align:center;color:#7e8da9;font-size:11px;padding:12px 0 2px}
+@media(max-width:500px){.app{padding:10px}h1{font-size:19px}.message{max-width:94%}}
 </style>
 </head>
-
 <body>
-
+<div class="app">
 <header>
-    <nav>
-        <div class="logo">NTECNO<span>AZ</span></div>
-
-        <div>
-            <a href="#home">Ana səhifə</a>
-            <a href="#products">Məhsullar</a>
-            <a href="#about">Haqqımızda</a>
-            <a href="#contact">Əlaqə</a>
-        </div>
-    </nav>
+  <div class="brand">
+    <div class="logo">TG</div>
+    <div>
+      <h1>TecnoGPT</h1>
+      <div class="sub">Şəxsi süni intellekt köməkçin</div>
+    </div>
+  </div>
+  <button id="newChat">＋ Yeni söhbət</button>
 </header>
-
-<main>
-
-<section class="hero" id="home">
-    <div class="hero-content">
-        <div class="badge">🚀 Texnologiyanın yeni ünvanı</div>
-
-        <h1>Gələcək burada<br><span>NTECNOAZ</span></h1>
-
-        <p>
-            Texnologiya dünyasını kəşf et!
-            Telefonlar, kompüterlər və oyun avadanlıqları
-            haqqında məlumatları bir yerdə tap.
-        </p>
-
-        <a href="#products" class="btn">Məhsullara bax →</a>
-        <a href="#about" class="btn btn-outline">Ətraflı məlumat</a>
+<details class="settings">
+  <summary>⚙️ AI bağlantısı — API açarını daxil et</summary>
+  <input id="apiKey" type="password" placeholder="Gemini API açarını bura daxil et" autocomplete="off">
+  <small>
+    API açarı bu səhifədə brauzerdə istifadə olunur. Onu heç kimlə paylaşma
+    və bu HTML faylını açıq şəkildə internetə yerləşdirmə.
+    İstifadənin pulsuz olub-olmaması Google hesabının limitlərindən asılıdır.
+  </small>
+</details>
+<div id="chat">
+  <section class="welcome" id="welcome">
+    <div class="star">✦</div>
+    <h2>Sənə necə kömək edim?</h2>
+    <p>İstənilən sualını yaz. TecnoGPT sənə kömək etməyə hazırdır.</p>
+    <div class="chips">
+      <button onclick="suggest('Mənə maraqlı bir fakt de')">Maraqlı fakt</button>
+      <button onclick="suggest('Minecraft haqqında danış')">Minecraft</button>
+      <button onclick="suggest('Mənə sayt ideyası ver')">Sayt ideyası</button>
     </div>
-</section>
-
-<section id="products">
-    <h2 class="section-title">🔥 Məhsullar dünyası</h2>
-
-    <p class="section-subtitle">
-        Sənin üçün seçilmiş texnologiya kateqoriyaları.
-    </p>
-
-    <div class="search-box">
-        <input
-            type="text"
-            id="search"
-            placeholder="🔎 Məhsul axtar..."
-            aria-label="Məhsul axtar"
-        >
-    </div>
-
-    <div class="categories">
-        <button class="category-btn active" data-category="all">
-            Hamısı
-        </button>
-
-        <button class="category-btn" data-category="phone">
-            📱 Telefonlar
-        </button>
-
-        <button class="category-btn" data-category="computer">
-            💻 Kompüterlər
-        </button>
-
-        <button class="category-btn" data-category="gaming">
-            🎮 Oyun
-        </button>
-    </div>
-
-    <div class="products" id="productList">
-
-        <article class="product" data-category="phone"
-                 data-name="smartfon telefon">
-            <div class="product-icon">📱</div>
-            <h3>Smartfonlar</h3>
-            <p>Müasir telefonlar və mobil texnologiyalar.</p>
-            <div class="price">Qiymət üçün əlaqə</div>
-            <button class="btn"
-                    onclick="addToCart('Smartfonlar', 0)">
-                Səbətə əlavə et
-            </button>
-        </article>
-
-        <article class="product" data-category="computer"
-                 data-name="noutbuk kompüter laptop">
-            <div class="product-icon">💻</div>
-            <h3>Noutbuklar</h3>
-            <p>Təhsil, iş və gündəlik istifadə üçün.</p>
-            <div class="price">Qiymət üçün əlaqə</div>
-            <button class="btn"
-                    onclick="addToCart('Noutbuklar', 0)">
-                Səbətə əlavə et
-            </button>
-        </article>
-
-        <article class="product" data-category="gaming"
-                 data-name="oyun kompüteri gaming pc">
-            <div class="product-icon">🖥️</div>
-            <h3>Gaming PC</h3>
-            <p>Oyun həvəskarları üçün kompüterlər.</p>
-            <div class="price">Qiymət üçün əlaqə</div>
-            <button class="btn"
-                    onclick="addToCart('Gaming PC', 0)">
-                Səbətə əlavə et
-            </button>
-        </article>
-
-        <article class="product" data-category="gaming"
-                 data-name="qulaqlıq headset">
-            <div class="product-icon">🎧</div>
-            <h3>Qulaqlıqlar</h3>
-            <p>Musiqi və oyun üçün səs avadanlıqları.</p>
-            <div class="price">Qiymət üçün əlaqə</div>
-            <button class="btn"
-                    onclick="addToCart('Qulaqlıqlar', 0)">
-                Səbətə əlavə et
-            </button>
-        </article>
-
-        <article class="product" data-category="gaming"
-                 data-name="klaviatura mouse gaming">
-            <div class="product-icon">⌨️</div>
-            <h3>Gaming aksesuarları</h3>
-            <p>Klaviatura, mouse və digər aksesuarlar.</p>
-            <div class="price">Qiymət üçün əlaqə</div>
-            <button class="btn"
-                    onclick="addToCart('Gaming aksesuarları', 0)">
-                Səbətə əlavə et
-            </button>
-        </article>
-
-        <article class="product" data-category="phone"
-                 data-name="smart saat smartwatch">
-            <div class="product-icon">⌚</div>
-            <h3>Smart saatlar</h3>
-            <p>Gündəlik həyat üçün ağıllı cihazlar.</p>
-            <div class="price">Qiymət üçün əlaqə</div>
-            <button class="btn"
-                    onclick="addToCart('Smart saatlar', 0)">
-                Səbətə əlavə et
-            </button>
-        </article>
-
-        <div class="no-results" id="noResults">
-            Axtarışa uyğun məhsul tapılmadı. 😕
-        </div>
-
-    </div>
-</section>
-
-<div class="promo">
-    <h2>⚡ Texnologiya səni gözləyir!</h2>
-
-    <p>
-        NTECNOAZ ilə texnologiya yeniliklərini kəşf et.
-        Sevdiyin cihazlar haqqında məlumat al və seçimlərini et.
-    </p>
-
-    <a href="#contact" class="btn">Bizimlə əlaqə saxla →</a>
+  </section>
 </div>
-
-<section id="about">
-    <h2 class="section-title">Niyə NTECNOAZ?</h2>
-
-    <p class="section-subtitle">
-        Texnologiya haqqında məlumat və rahat istifadə üçün hazırlanmış platforma.
-    </p>
-
-    <div class="features">
-
-        <div class="feature">
-            <div class="icon">🚀</div>
-            <h3>Müasir dizayn</h3>
-            <p>Telefon və kompüter ekranlarına uyğun rahat interfeys.</p>
-        </div>
-
-        <div class="feature">
-            <div class="icon">🔍</div>
-            <h3>Rahat axtarış</h3>
-            <p>Axtarış və kateqoriyalarla məhsulları asanlıqla tap.</p>
-        </div>
-
-        <div class="feature">
-            <div class="icon">💙</div>
-            <h3>Texnologiya sevgisi</h3>
-            <p>Texnologiya həvəskarları üçün hazırlanmış layihə.</p>
-        </div>
-
-    </div>
-</section>
-
-<section id="contact" class="contact">
-    <h2 class="section-title">Bizimlə əlaqə</h2>
-
-    <p class="section-subtitle">
-        Sualların və ya təkliflərin var? Bizə yaz!
-    </p>
-
-    <div class="contact-box">
-        <h3>📲 NTECNOAZ</h3>
-
-        <p>
-            Məhsullar haqqında məlumat almaq üçün
-            bizimlə əlaqə saxlaya bilərsən.
-        </p>
-
-        <a href="https://wa.me/994XXXXXXXXX"
-           class="btn"
-           target="_blank"
-           rel="noopener noreferrer">
-            WhatsApp ilə əlaqə
-        </a>
-    </div>
-</section>
-
-</main>
-
-<footer>
-    <strong>NTECNOAZ</strong><br>
-    Texnologiyanın yeni ünvanı 🚀<br>
-    © <span id="year"></span> NTECNOAZ. Bütün hüquqlar qorunur.
-</footer>
-
-<button class="cart-button" onclick="toggleCart()">
-    🛒 Səbət (<span id="cartCount">0</span>)
-</button>
-
-<div class="cart-panel" id="cartPanel">
-    <span class="close-cart" onclick="toggleCart()">×</span>
-    <h3>🛒 Səbətin</h
+<form id="form">
+  <textarea id="input" rows="1" placeholder="TecnoGPT-yə mesaj yaz..."></textarea>
+  <button id="send" type="submit">↑</button>
+</form>
+<footer>TecnoGPT · Nicat Rəhimli tərəfindən hazırlanıb</footer>
+</div>
+<script>
+const chat=document.getElementById("chat");
+const welcome=document.getElementById("welcome");
+const input=document.getElementById("input");
+const apiKeyInput=document.getElementById("apiKey");
+const sendButton=document.getElementById("send");
+let history=[];
+function addMessage(text,role){
+  welcome.style.display="none";
+  const el=document.createElement("div");
+  el.className="message "+role;
+  el.textContent=text;
+  chat.appendChild(el);
+  chat.scrollTop=chat.scrollHeight;
+  return el;
+}
+async function ask(text){
+  text=text.trim();
+  if(!text || sendButton.disabled) return;
+  const key=apiKeyInput.value.trim();
+  if(!key){
+    addMessage("Əvvəlcə yuxarıdakı ⚙️ AI bağlantısı bölməsinə daxil ol və Gemini API açarını əlavə et.","bot");
+    return;
+  }
+  addMessage(text,"user");
+  history.push({role:"user",parts:[{text}]});
+  input.value="";
+  const reply=addMessage("TecnoGPT düşünür...","bot");
+  sendButton.disabled=true;
+  try{
+    const response=await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="+encodeURIComponent(key),
+      {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          system_instruction:{
+            parts:[{text:"Sənin adın TecnoGPT-dir. Yaradıcın Nicat Rəhimlidir. İstifadəçiyə Azərbaycan və ya türk dilində, onun dilinə uyğun, aydın və faydalı cavab ver."}]
+          },
+          contents:history,
+          generationConfig:{temperature:0.7,maxOutputTokens:2048}
+        })
+      }
+    );
+    const data=await response.json();
+    if(!response.ok){
+      const message=data?.error?.message || "API sorğusu uğursuz oldu.";
+      throw new Error(message);
+    }
+    const answer=data?.candidates?.[0]?.content?.parts
+      ?.map(part=>part.text||"").join("").trim();
+    if(!answer) throw new Error("AI cavab qaytarmadı. Bir daha yoxla.");
+    reply.textContent=answer;
+    history.push({role:"model",parts:[{text:answer}]});
+  }catch(error){
+    reply.textContent="Xəta: "+error.message+
+      "\n\nAPI açarını və modelə giriş imkanını yoxla.";
+    reply.classList.add("error");
+    history.pop();
+  }finally{
+    sendButton.disabled=false;
+    chat.scrollTop=chat.scrollHeight;
+    input.focus();
+  }
+}
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  ask(input.value);
+});
+input.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.shiftKey){
+    e.preventDefault();
+    document.getElementById("form").requestSubmit();
+  }
+});
+input.addEventListener("input",()=>{
+  input.style.height="auto";
+  input.style.height=Math.min(input.scrollHeight,130)+"px";
+});
+function suggest(text){ask(text)}
+document.getElementById("newChat").addEventListener("click",()=>{
+  history=[];
+  chat.replaceChildren();
+  chat.appendChild(welcome);
+  welcome.style.display="block";
+  input.focus();
+});
+</script>
+</body>
+</html>
